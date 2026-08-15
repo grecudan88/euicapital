@@ -18,10 +18,15 @@ type Locale = (typeof LOCALES)[number];
 const DEFAULT_LOCALE: Locale = "ro";
 
 /**
- * When true, a browser that ranks English above Romanian is sent to /en/.
- * Set to false to force every first visit to Romanian regardless of browser.
+ * Romanian is the primary language, so every first visit lands on /ro/
+ * regardless of what the browser asks for. Visitors reach English through the
+ * RO/EN switcher, which stores their choice in the `locale` cookie and is
+ * honoured from then on.
+ *
+ * Set this to true to let Accept-Language decide instead: a browser that ranks
+ * English strictly above Romanian would then land on /en/.
  */
-const RESPECT_BROWSER_LANGUAGE = true;
+const RESPECT_BROWSER_LANGUAGE = false;
 
 interface Env {
   ASSETS: Fetcher;
