@@ -6,7 +6,7 @@
  * arrive here, which is how three things get handled:
  *
  *   1. `www.` — folded onto the canonical apex host.
- *   2. `/` — no asset exists at the root, so we land the visitor in a language.
+ *   2. `/` and other unprefixed paths — folded into a language.
  *   3. `/api/*` — the contact endpoint.
  *   4. Everything else — a localised 404.
  */
@@ -175,6 +175,37 @@ function redirectToLocale(request: Request): Response {
   });
 }
 
+/**
+ * Sends an unprefixed path to its localised equivalent: /contact/ -> /ro/contact/.
+ *
+ * Every page lives under /ro/ or /en/, so a hand-typed or externally linked URL
+ * without a prefix would otherwise 404. We only redirect once we have confirmed
+ * the localised page actually exists, so genuinely wrong URLs still 404 instead
+ * of bouncing the visitor to a second dead end.
+ */
+async function localePrefixRedirect(request: Request, env: Env): Promise<Response | null> {
+  const url = new URL(request.url);
+  if (pathLocale(url.pathname)) return null;
+
+  const locale = cookieLocale(request) ?? browserLocale(request);
+  const path = url.pathname.endsWith("/") ? url.pathname : `${url.pathname}/`;
+  const candidate = `/${locale}${path}`;
+
+  const probe = await env.ASSETS.fetch(new URL(candidate, url));
+  if (probe.status !== 200) return null;
+
+  const target = new URL(url);
+  target.pathname = candidate;
+  return new Response(null, {
+    status: 302,
+    headers: {
+      location: target.toString(),
+      vary: "Accept-Language, Cookie",
+      "cache-control": "no-store",
+    },
+  });
+}
+
 async function serveNotFound(request: Request, env: Env): Promise<Response> {
   const url = new URL(request.url);
   const locale = pathLocale(url.pathname) ?? cookieLocale(request) ?? browserLocale(request);
@@ -314,7 +345,9 @@ export default {
     if (pathname === "/" || pathname === "") return redirectToLocale(request);
 
     const asset = await env.ASSETS.fetch(request);
-    if (asset.status === 404) return serveNotFound(request, env);
-    return asset;
+    if (asset.status !== 404) return asset;
+
+    const prefixed = await localePrefixRedirect(request, env);
+    return prefixed ?? serveNotFound(request, env);
   },
 } satisfies ExportedHandler<Env>;
