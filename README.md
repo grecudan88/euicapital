@@ -57,16 +57,26 @@ The site ships in **Romanian (primary)** and **English**. Every page exists at b
 `/` has no HTML file behind it, so the request falls through to the Worker, which redirects:
 
 1. **`locale` cookie** — set by the RO/EN switcher in the header and footer, kept for a year. A returning visitor lands where they chose last time.
-2. **`Accept-Language`** — English wins only if the browser ranks it *strictly above* Romanian. A tie, an unparseable header, or a browser that mentions neither language all go to Romanian.
-3. **Romanian**, always, as the fallback.
+2. **Romanian**, for everyone else. The browser's `Accept-Language` is deliberately ignored, so a visitor whose Chrome is set to English still sees the Romanian site first and switches manually if they want English.
 
-The same applies to any path without a locale prefix: `/contact/` redirects to `/ro/contact/` (or `/en/contact/`). The Worker confirms the localised page exists before redirecting, so a genuinely wrong URL still gets a 404 rather than bouncing to a second dead end. This matters for links printed on business cards, sent in email, or left over from an older site — none of them need the prefix.
+The same applies to any path without a locale prefix: `/contact/` redirects to `/ro/contact/`. The Worker confirms the localised page exists before redirecting, so a genuinely wrong URL still gets a 404 rather than bouncing to a second dead end. This matters for links printed on business cards, sent in email, or left over from an older site — none of them need the prefix.
 
-To force every first visit to Romanian regardless of browser, set `RESPECT_BROWSER_LANGUAGE = false` at the top of [`worker/index.ts`](worker/index.ts). The switcher still works; only the automatic guess is disabled.
+To let the browser decide instead, set `RESPECT_BROWSER_LANGUAGE = true` at the top of [`worker/index.ts`](worker/index.ts). English then wins when a browser ranks it strictly above Romanian; ties and unrelated languages still go to Romanian.
 
 The redirect is a 302 with `Vary: Accept-Language, Cookie` and `Cache-Control: no-store`, so no cache can serve one visitor's language to another.
 
-`npm run dev` does not run the Worker, so `next.config.ts` adds a plain `/` → `/ro/` redirect for the dev server only. That is why `next build` prints **`Specified "redirects" will not automatically work with "output: export"`** — expected and harmless; the export intentionally emits no root page so the Worker can do the real detection.
+`npm run dev` does not run the Worker, so `next.config.ts` mirrors these redirects for the dev server only. That is why `next build` prints **`Specified "redirects" will not automatically work with "output: export"`** — expected and harmless; the export intentionally emits no root page so the Worker can do the real detection.
+
+### A trap worth knowing: `not_found_handling`
+
+`assets.not_found_handling` in `wrangler.jsonc` **must stay `"none"`**. Set to `"404-page"`, Cloudflare's asset layer treats `out/404.html` as a match for any unmatched **HTML navigation** and serves it without ever invoking the Worker — which silently kills the language redirect for real browsers.
+
+It is a nasty one to catch, because `curl` sends `Accept: */*`, does not trigger that path, and reports everything working. Always reproduce browser behaviour explicitly:
+
+```bash
+curl -sL -o /dev/null -w '%{http_code} %{url_effective}
+'   -H 'accept: text/html,application/xhtml+xml'   https://euicapital.ro/
+```
 
 ### SEO
 
