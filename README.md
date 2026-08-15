@@ -3,6 +3,7 @@
 Marketing and lead-generation site for an EU funding consultancy.
 
 **Stack:** Next.js 16 (App Router, static export) · React 19 · Tailwind CSS 4 · TypeScript
+**Languages:** Romanian (primary) and English, at `/ro/` and `/en/`
 **Hosting:** Cloudflare Workers — static assets from the edge, plus one Worker route for the contact API.
 
 ---
@@ -44,6 +45,45 @@ npm run preview      # next build && wrangler dev  -> http://localhost:8787
 | `npm run deploy` | Build, then `wrangler deploy` |
 | `npm run typecheck` | Type-checks the site and the Worker separately |
 | `npm run cf-typegen` | Regenerates Cloudflare binding types from `wrangler.jsonc` |
+
+---
+
+## Languages
+
+The site ships in **Romanian (primary)** and **English**. Every page exists at both `/ro/…` and `/en/…`; there is no unprefixed page.
+
+### How a first visit picks a language
+
+`/` has no HTML file behind it, so the request falls through to the Worker, which redirects:
+
+1. **`locale` cookie** — set by the RO/EN switcher in the header and footer, kept for a year. A returning visitor lands where they chose last time.
+2. **`Accept-Language`** — English wins only if the browser ranks it *strictly above* Romanian. A tie, an unparseable header, or a browser that mentions neither language all go to Romanian.
+3. **Romanian**, always, as the fallback.
+
+To force every first visit to Romanian regardless of browser, set `RESPECT_BROWSER_LANGUAGE = false` at the top of [`worker/index.ts`](worker/index.ts). The switcher still works; only the automatic guess is disabled.
+
+The redirect is a 302 with `Vary: Accept-Language, Cookie` and `Cache-Control: no-store`, so no cache can serve one visitor's language to another.
+
+### SEO
+
+Each page carries a canonical URL plus `hreflang` alternates for `ro`, `en` and `x-default` (which points at Romanian). The sitemap lists all 32 URLs with their alternates.
+
+### Adding or changing copy
+
+All text lives in `src/content/`. Nothing user-visible is hardcoded in a component:
+
+| File | Holds |
+|---|---|
+| `pages.ts` | Every page's copy, both languages |
+| `site.ts` | Nav labels, tagline, headline statistics, address |
+| `programmes.ts` | Programme names and descriptions; slugs and themes are shared |
+| `services.ts`, `results.ts` | Services and case studies |
+
+`programmes.ts`, `services.ts` and `results.ts` split each entry into a shared structural part (slug, theme, management mode) and a per-locale text part, so the two languages cannot drift apart structurally.
+
+### Adding a third language
+
+Add the code to `locales` in `src/content/locales.ts`, then fill in the new key everywhere TypeScript reports a missing property. The Worker's `LOCALES` array needs the same addition. URL path segments stay in English (`/fr/services/`) — translating them would mean a slug-mapping layer, which is not built.
 
 ---
 
@@ -103,11 +143,11 @@ The endpoint already handles a honeypot field, per-field length caps, email form
 
 Everything below is placeholder text written to demonstrate layout. Replace it.
 
-- [ ] **`src/content/results.ts`** — the six case studies are **invented examples**, not real clients. Swap in your own engagements and delete the amber placeholder banner in [`src/app/results/page.tsx`](src/app/results/page.tsx).
-- [ ] **`src/content/site.ts`** — company email, phone, offices, LinkedIn, founding year, and the four headline statistics on the homepage. Do not publish success-rate or funding-secured figures you cannot evidence.
-- [ ] **`src/app/about/page.tsx`** — the `team` array holds four generic profiles. Replace with real names, photographs and biographies.
+- [ ] **`src/content/results.ts`** — the six case studies are **invented examples**, not real clients. Swap in your own engagements and delete the amber placeholder banner in [`src/app/[locale]/results/page.tsx`](src/app/[locale]/results/page.tsx).
+- [ ] **`src/content/site.ts`** — company email, phone, offices, LinkedIn, founding year, and the four headline statistics on the homepage (**in both languages**). Do not publish success-rate or funding-secured figures you cannot evidence.
+- [ ] **`src/content/pages.ts`** — the `about.team` array in each locale holds four generic profiles. Replace with real names, photographs and biographies.
 - [ ] **`src/content/programmes.ts`** — budget figures are rounded 2021–2027 headline allocations. Verify each against the current work programme on the [Funding & Tenders Portal](https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/home) before publishing.
-- [ ] **`src/app/legal/`** — the privacy notice and terms are templates, not legal advice. Have a lawyer review them and add your registered company number, registered address and governing law.
+- [ ] **`legal` in `src/content/pages.ts`** — the privacy notice and terms are templates, not legal advice. Have a lawyer review them and add your registered company number, registered address and governing law.
 - [ ] **`public/`** — add `favicon.ico`, an `apple-touch-icon.png` and an Open Graph image (1200×630).
 - [ ] **`site.url`** in `src/content/site.ts` — must be your real domain; it drives canonical URLs, the sitemap and Open Graph tags.
 
@@ -120,21 +160,29 @@ The footer and terms both state plainly that the company is independent and not 
 ## Project structure
 
 ```
-worker/index.ts            Cloudflare Worker — /api/contact, /api/health, asset fallthrough
-src/app/                   Routes (App Router). Each folder is a page.
-  page.tsx                 Homepage
-  services/                Service detail
-  programmes/              Index with client-side filtering
-  programmes/[slug]/       One prerendered page per programme
-  process/  results/  about/  contact/
-  legal/privacy/  legal/terms/
-  sitemap.ts  robots.ts  not-found.tsx
+worker/index.ts            Worker — language routing on /, /api/contact, localised 404s
+src/app/
+  [locale]/                Every page lives under /ro/ or /en/
+    layout.tsx             Root layout; sets <html lang> and hreflang alternates
+    page.tsx               Homepage
+    services/  programmes/  programmes/[slug]/
+    process/  results/  about/  contact/
+    legal/privacy/  legal/terms/
+    404/                   Prerendered 404 body, served by the Worker
+    not-found.tsx          Client-side 404 for in-app navigation
+  sitemap.ts  robots.ts  globals.css
 src/components/            Shared UI. `ui.tsx` holds the primitives.
-src/content/               All copy and data. Edit here, not in components.
+src/content/
+  locales.ts               Locale list, default, path helpers
+  site.ts                  Company facts + per-locale nav, tagline, stats
+  pages.ts                 All page copy, both languages
+  services.ts  programmes.ts  results.ts
 ```
 
 Design tokens — colours, fonts, the `eyebrow` and `hairline` utilities — live in [`src/app/globals.css`](src/app/globals.css) under Tailwind 4's `@theme` block.
 
 ## Adding a page
 
-Create `src/app/<route>/page.tsx`, export a `metadata` object and a default component, then add the route to `nav` in `src/content/site.ts` and to `src/app/sitemap.ts`. Use `PageHero` from `@/components/ui` for a consistent header.
+Create `src/app/[locale]/<route>/page.tsx`. It receives `params: Promise<{ locale: string }>` — narrow it with `assertLocale` — then pull copy from `getCopy(locale)`. Add the strings to **both** locales in `src/content/pages.ts`, the route to `navPaths` in `src/content/site.ts`, and the path to `src/app/sitemap.ts`.
+
+Because `Copy` is derived from the Romanian object, adding a Romanian string without its English counterpart fails the build. That is deliberate.

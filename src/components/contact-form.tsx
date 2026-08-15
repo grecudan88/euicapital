@@ -1,41 +1,32 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
+import type { Locale } from "@/content/locales";
+import { getCopy } from "@/content/pages";
 import { site } from "@/content/site";
 
 type Status = "idle" | "sending" | "sent" | "error";
-
-const stages = [
-  "Exploring — no specific call yet",
-  "Call identified, not started",
-  "Draft in progress",
-  "Resubmission after a rejection",
-  "Awarded — need delivery support",
-];
-
-const budgets = [
-  "Under €500k",
-  "€500k – €2M",
-  "€2M – €10M",
-  "Over €10M",
-  "Not yet defined",
-];
 
 const fieldClass =
   "mt-2 w-full rounded-lg border border-ink-900/15 bg-white px-4 py-2.5 text-[15px] text-ink-900 outline-none transition placeholder:text-ink-400 focus:border-gold-500 focus:ring-2 focus:ring-gold-200";
 
 const labelClass = "block text-sm font-medium text-ink-800";
 
-export function ContactForm() {
+export function ContactForm({ locale }: { locale: Locale }) {
   const [status, setStatus] = useState<Status>("idle");
   const [errors, setErrors] = useState<string[]>([]);
+
+  const t = getCopy(locale).contact.form;
 
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setStatus("sending");
     setErrors([]);
 
-    const payload = Object.fromEntries(new FormData(event.currentTarget));
+    const payload = {
+      ...Object.fromEntries(new FormData(event.currentTarget)),
+      locale,
+    };
 
     try {
       const response = await fetch("/api/contact", {
@@ -52,10 +43,10 @@ export function ContactForm() {
         setStatus("sent");
         return;
       }
-      setErrors(data.errors ?? ["Something went wrong. Please try again."]);
+      setErrors(data.errors ?? [t.genericError]);
       setStatus("error");
     } catch {
-      setErrors([`Could not reach the server. Please email ${site.email} instead.`]);
+      setErrors([t.networkError(site.email)]);
       setStatus("error");
     }
   }
@@ -64,71 +55,95 @@ export function ContactForm() {
     return (
       <div className="rounded-2xl border border-gold-400 bg-white p-10 text-center">
         <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-gold-200">
-          <svg viewBox="0 0 20 20" fill="none" stroke="#9a7434" strokeWidth={1.8} className="h-6 w-6">
+          <svg
+            viewBox="0 0 20 20"
+            fill="none"
+            stroke="#9a7434"
+            strokeWidth={1.8}
+            className="h-6 w-6"
+          >
             <path d="M4 10.5l4 4 8-9" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
         </div>
-        <h2 className="mt-5 font-display text-2xl text-ink-950">Message received</h2>
+        <h2 className="mt-5 font-display text-2xl text-ink-950">{t.successTitle}</h2>
         <p className="mx-auto mt-3 max-w-md text-[15px] leading-relaxed text-ink-700">
-          Thank you. A senior consultant will read this personally and reply within one working day
-          — usually with a first view on whether your project is fundable and under which
-          instrument.
+          {t.successBody}
         </p>
       </div>
     );
   }
 
   return (
-    <form onSubmit={onSubmit} noValidate className="rounded-2xl border border-ink-900/10 bg-white p-7 sm:p-9">
+    <form
+      onSubmit={onSubmit}
+      noValidate
+      className="rounded-2xl border border-ink-900/10 bg-white p-7 sm:p-9"
+    >
       {/* Honeypot: hidden from users, irresistible to bots. */}
       <div aria-hidden className="absolute -left-[9999px] h-0 w-0 overflow-hidden">
         <label>
-          Company website
+          {t.honeypot}
           <input type="text" name="company_website" tabIndex={-1} autoComplete="off" />
         </label>
       </div>
 
       <div className="grid gap-5 sm:grid-cols-2">
         <label className={labelClass}>
-          Full name <span className="text-gold-600">*</span>
-          <input name="name" required autoComplete="name" className={fieldClass} placeholder="Ana Ionescu" />
+          {t.name} <span className="text-gold-600">*</span>
+          <input
+            name="name"
+            required
+            autoComplete="name"
+            className={fieldClass}
+            placeholder={t.namePlaceholder}
+          />
         </label>
 
         <label className={labelClass}>
-          Work email <span className="text-gold-600">*</span>
+          {t.email} <span className="text-gold-600">*</span>
           <input
             name="email"
             type="email"
             required
             autoComplete="email"
             className={fieldClass}
-            placeholder="ana@company.eu"
+            placeholder={t.emailPlaceholder}
           />
         </label>
 
         <label className={labelClass}>
-          Organisation
-          <input name="organisation" autoComplete="organization" className={fieldClass} placeholder="Company or institution" />
+          {t.organisation}
+          <input
+            name="organisation"
+            autoComplete="organization"
+            className={fieldClass}
+            placeholder={t.organisationPlaceholder}
+          />
         </label>
 
         <label className={labelClass}>
-          Country
-          <input name="country" autoComplete="country-name" className={fieldClass} placeholder="Member State" />
+          {t.country}
+          <input
+            name="country"
+            autoComplete="country-name"
+            className={fieldClass}
+            placeholder={t.countryPlaceholder}
+          />
         </label>
 
         <label className={labelClass}>
-          Project stage
-          <select name="stage" defaultValue={stages[0]} className={fieldClass}>
-            {stages.map((s) => (
+          {t.stage}
+          <select name="stage" defaultValue={t.stages[0]} className={fieldClass}>
+            {t.stages.map((s) => (
               <option key={s}>{s}</option>
             ))}
           </select>
         </label>
 
         <label className={labelClass}>
-          Indicative project budget
-          <select name="budget" defaultValue={budgets[4]} className={fieldClass}>
-            {budgets.map((b) => (
+          {t.budget}
+          <select name="budget" defaultValue={t.budgets[4]} className={fieldClass}>
+            {t.budgets.map((b) => (
               <option key={b}>{b}</option>
             ))}
           </select>
@@ -136,13 +151,13 @@ export function ContactForm() {
       </div>
 
       <label className={`${labelClass} mt-5`}>
-        Tell us about the project <span className="text-gold-600">*</span>
+        {t.message} <span className="text-gold-600">*</span>
         <textarea
           name="message"
           required
           rows={6}
           className={fieldClass}
-          placeholder="What are you building or investing in, what stage is it at, and is there a specific call or deadline you are working towards?"
+          placeholder={t.messagePlaceholder}
         />
       </label>
 
@@ -162,11 +177,9 @@ export function ContactForm() {
           disabled={status === "sending"}
           className="inline-flex items-center gap-2 rounded-full bg-ink-900 px-7 py-3 text-sm font-semibold text-paper transition hover:bg-ink-800 disabled:cursor-not-allowed disabled:opacity-60"
         >
-          {status === "sending" ? "Sending…" : "Send enquiry"}
+          {status === "sending" ? t.submitting : t.submit}
         </button>
-        <p className="text-xs leading-relaxed text-ink-600">
-          We reply within one working day. Your details are used only to respond to this enquiry.
-        </p>
+        <p className="text-xs leading-relaxed text-ink-600">{t.note}</p>
       </div>
     </form>
   );

@@ -1,33 +1,43 @@
 import type { Metadata } from "next";
 import { ArrowRight, ButtonLink, Container, PageHero, Tag } from "@/components/ui";
-import { caseStudies } from "@/content/results";
-import { stats } from "@/content/site";
+import { assertLocale, type Locale } from "@/content/locales";
+import { getCopy } from "@/content/pages";
+import { getCaseStudies } from "@/content/results";
+import { href, siteCopy } from "@/content/site";
 
-export const metadata: Metadata = {
-  title: "Results",
-  description:
-    "Selected EU funding engagements across Horizon Europe, ERDF, LIFE, ESF+, Interreg and the Innovation Fund.",
-};
+type Params = { locale: string };
 
-export default function ResultsPage() {
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<Params>;
+}): Promise<Metadata> {
+  const { locale: localeParam } = await params;
+  const locale = assertLocale(localeParam);
+  const t = getCopy(locale).results;
+  return { title: t.metaTitle, description: t.metaDescription };
+}
+
+export default async function ResultsPage({ params }: { params: Promise<Params> }) {
+  const { locale: localeParam } = await params;
+  const locale = assertLocale(localeParam);
+  const t = getCopy(locale).results;
+  const caseStudies = getCaseStudies(locale);
+  const { stats } = siteCopy[locale];
+
   return (
     <>
-      <PageHero
-        eyebrow="Results"
-        title="Selected engagements"
-        lede="Clients are anonymised at their request. Programme, amount and outcome are stated as they were recorded at award."
-      />
+      <PageHero eyebrow={t.eyebrow} title={t.title} lede={t.lede} />
 
       {/* PLACEHOLDER BANNER — delete this block once src/content/results.ts holds real engagements. */}
       <div className="bg-gold-200/60">
         <Container className="py-4">
           <p className="text-sm text-ink-800">
-            <strong className="font-semibold">Placeholder content.</strong> The case studies below
-            are illustrative examples. Replace them in{" "}
+            <strong className="font-semibold">{t.placeholderStrong}</strong> {t.placeholderBody}{" "}
             <code className="rounded bg-white/70 px-1.5 py-0.5 font-mono text-[13px]">
               src/content/results.ts
             </code>{" "}
-            and remove this banner before launch.
+            {t.placeholderEnd}
           </p>
         </Container>
       </div>
@@ -68,7 +78,7 @@ export default function ResultsPage() {
                 <div className="space-y-6">
                   <div>
                     <h3 className="text-xs font-semibold uppercase tracking-[0.14em] text-ink-400">
-                      The situation
+                      {t.situation}
                     </h3>
                     <p className="mt-2 text-[15px] leading-relaxed text-ink-700">
                       {study.challenge}
@@ -76,7 +86,7 @@ export default function ResultsPage() {
                   </div>
                   <div>
                     <h3 className="text-xs font-semibold uppercase tracking-[0.14em] text-ink-400">
-                      What we did
+                      {t.whatWeDid}
                     </h3>
                     <ul className="mt-2 space-y-2">
                       {study.approach.map((a) => (
@@ -100,15 +110,14 @@ export default function ResultsPage() {
 
           <div className="mt-16 flex flex-col items-start justify-between gap-6 rounded-2xl bg-ink-900 p-10 sm:flex-row sm:items-center">
             <div>
-              <h2 className="font-display text-2xl text-paper">
-                Your project could be the next one here
-              </h2>
-              <p className="mt-2 text-ink-200">
-                Tell us what you are building and which stage you are at.
-              </p>
+              <h2 className="font-display text-2xl text-paper">{t.ctaTitle}</h2>
+              <p className="mt-2 text-ink-200">{t.ctaLede}</p>
             </div>
-            <ButtonLink href="/contact/" className="bg-gold-500 text-ink-950 hover:bg-gold-400">
-              Start a conversation
+            <ButtonLink
+              href={href(locale, "contact")}
+              className="bg-gold-500 text-ink-950 hover:bg-gold-400"
+            >
+              {t.ctaLabel}
               <ArrowRight />
             </ButtonLink>
           </div>

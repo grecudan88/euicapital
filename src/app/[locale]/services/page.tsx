@@ -1,21 +1,32 @@
 import type { Metadata } from "next";
 import { ArrowRight, ButtonLink, Container, PageHero } from "@/components/ui";
-import { services } from "@/content/services";
+import { assertLocale, type Locale } from "@/content/locales";
+import { getCopy } from "@/content/pages";
+import { getServices } from "@/content/services";
+import { href } from "@/content/site";
 
-export const metadata: Metadata = {
-  title: "Services",
-  description:
-    "Funding strategy, proposal writing, consortium building, grant management, audit support and resubmission for EU funding applicants.",
-};
+type Params = { locale: string };
 
-export default function ServicesPage() {
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<Params>;
+}): Promise<Metadata> {
+  const { locale: localeParam } = await params;
+  const locale = assertLocale(localeParam);
+  const t = getCopy(locale).services;
+  return { title: t.metaTitle, description: t.metaDescription };
+}
+
+export default async function ServicesPage({ params }: { params: Promise<Params> }) {
+  const { locale: localeParam } = await params;
+  const locale = assertLocale(localeParam);
+  const t = getCopy(locale).services;
+  const services = getServices(locale);
+
   return (
     <>
-      <PageHero
-        eyebrow="Services"
-        title="Six ways we get involved"
-        lede="Engage us for the whole cycle or for the single stage where your team runs out of capacity. Each engagement has a defined scope, a fixed fee and a named lead."
-      />
+      <PageHero eyebrow={t.eyebrow} title={t.title} lede={t.lede} />
 
       <section className="bg-paper py-20 sm:py-28">
         <Container>
@@ -43,7 +54,7 @@ export default function ServicesPage() {
 
                 <div className="rounded-2xl border border-ink-900/10 bg-white p-7">
                   <p className="text-xs font-semibold uppercase tracking-[0.14em] text-gold-600">
-                    What you receive
+                    {t.deliverablesLabel}
                   </p>
                   <ul className="mt-5 space-y-3">
                     {service.deliverables.map((d) => (
@@ -56,14 +67,18 @@ export default function ServicesPage() {
                           stroke="currentColor"
                           strokeWidth={1.8}
                         >
-                          <path d="M3 8.5l3.2 3.2L13 5" strokeLinecap="round" strokeLinejoin="round" />
+                          <path
+                            d="M3 8.5l3.2 3.2L13 5"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          />
                         </svg>
                         {d}
                       </li>
                     ))}
                   </ul>
                   <p className="mt-6 border-t border-ink-900/10 pt-4 text-sm text-ink-600">
-                    <span className="font-semibold text-ink-900">Typical duration:</span>{" "}
+                    <span className="font-semibold text-ink-900">{t.durationLabel}</span>{" "}
                     {service.timeline}
                   </p>
                 </div>
@@ -76,16 +91,11 @@ export default function ServicesPage() {
       <section className="bg-paper-warm py-20">
         <Container className="flex flex-col items-start justify-between gap-8 sm:flex-row sm:items-center">
           <div className="max-w-xl">
-            <h2 className="font-display text-2xl text-ink-950 sm:text-3xl">
-              Not sure which one you need?
-            </h2>
-            <p className="mt-3 text-ink-700">
-              Describe the project in a few lines. We will come back with the stage we would start
-              at and what it would cost.
-            </p>
+            <h2 className="font-display text-2xl text-ink-950 sm:text-3xl">{t.closingTitle}</h2>
+            <p className="mt-3 text-ink-700">{t.closingLede}</p>
           </div>
-          <ButtonLink href="/contact/">
-            Get in touch
+          <ButtonLink href={href(locale, "contact")}>
+            {t.closingCta}
             <ArrowRight />
           </ButtonLink>
         </Container>
