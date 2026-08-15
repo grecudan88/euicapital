@@ -8,7 +8,13 @@
     "directory": "./out",
     "binding": "ASSETS",
     "html_handling": "auto-trailing-slash",
-    "not_found_handling": "404-page"
+    // MUST stay "none". With "404-page", Cloudflare's asset layer treats
+    // out/404.html as a match for any unmatched HTML navigation and serves it
+    // WITHOUT invoking the Worker — which killed the `/` -> `/ro/` redirect for
+    // real browsers while curl (Accept: */*) still fell through and worked.
+    // "none" lets every unmatched request reach the Worker, which serves its
+    // own localised 404 with a 404 status.
+    "not_found_handling": "none"
   },
   // Both hostnames are attached to this Worker, so both resolve after deploy.
   // The Worker folds www onto the apex; see README "Custom domain".
