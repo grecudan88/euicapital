@@ -64,6 +64,8 @@ To force every first visit to Romanian regardless of browser, set `RESPECT_BROWS
 
 The redirect is a 302 with `Vary: Accept-Language, Cookie` and `Cache-Control: no-store`, so no cache can serve one visitor's language to another.
 
+`npm run dev` does not run the Worker, so `next.config.ts` adds a plain `/` → `/ro/` redirect for the dev server only. That is why `next build` prints **`Specified "redirects" will not automatically work with "output: export"`** — expected and harmless; the export intentionally emits no root page so the Worker can do the real detection.
+
 ### SEO
 
 Each page carries a canonical URL plus `hreflang` alternates for `ro`, `en` and `x-default` (which points at Romanian). The sitemap lists all 32 URLs with their alternates.

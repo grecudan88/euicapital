@@ -3,7 +3,8 @@ import { Inter, Source_Serif_4 } from "next/font/google";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { getCopy } from "@/content/pages";
-import { locales, localeTags, type Locale, assertLocale } from "@/content/locales";
+import { notFound } from "next/navigation";
+import { isLocale, locales, localeTags } from "@/content/locales";
 import { site, siteCopy } from "@/content/site";
 import "../globals.css";
 
@@ -31,7 +32,8 @@ export async function generateMetadata({
   params: Promise<Params>;
 }): Promise<Metadata> {
   const { locale: localeParam } = await params;
-  const locale = assertLocale(localeParam);
+  if (!isLocale(localeParam)) return {};
+  const locale = localeParam;
   const copy = siteCopy[locale];
 
   return {
@@ -88,7 +90,10 @@ export default async function LocaleLayout({
   params: Promise<Params>;
 }) {
   const { locale: localeParam } = await params;
-  const locale = assertLocale(localeParam);
+  // `generateStaticParams` only emits real locales, but the dev server matches
+  // any string against [locale] — reject the rest so dev matches production.
+  if (!isLocale(localeParam)) notFound();
+  const locale = localeParam;
   const copy = getCopy(locale);
 
   const organisationSchema = {
