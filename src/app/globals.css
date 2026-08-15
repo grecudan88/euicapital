@@ -1,0 +1,58 @@
+@import "tailwindcss";
+
+@theme {
+  --color-ink-950: #06121f;
+  --color-ink-900: #0a1c2e;
+  --color-ink-800: #12293f;
+  --color-ink-700: #1d3b55;
+  --color-ink-600: #2f5372;
+  --color-ink-400: #6b8aa8;
+  --color-ink-200: #c3d2df;
+  --color-ink-100: #e2eaf1;
+
+  --color-paper: #fbfaf7;
+  --color-paper-warm: #f4f1ea;
+
+  --color-gold-600: #9a7434;
+  --color-gold-500: #b8903f;
+  --color-gold-400: #cfae6a;
+  --color-gold-200: #ecdcb8;
+
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-serif), ui-serif, Georgia, serif;
+
+  --text-display: 3.75rem;
+  --text-display--line-height: 1.04;
+  --text-display--letter-spacing: -0.025em;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-paper);
+  color: var(--color-ink-900);
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background-color: var(--color-gold-200);
+  color: var(--color-ink-950);
+}
+
+/* Thin rule used to open sections. */
+@utility eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.625rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-gold-600);
+}
+
+@utility hairline {
+  border-top: 1px solid color-mix(in oklab, var(--color-ink-900) 12%, transparent);
+}

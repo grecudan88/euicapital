@@ -1,0 +1,19 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "euicapital",
+  "main": "worker/index.ts",
+  "compatibility_date": "2026-08-15",
+  "compatibility_flags": ["nodejs_compat"],
+  "assets": {
+    "directory": "./out",
+    "binding": "ASSETS",
+    "html_handling": "auto-trailing-slash",
+    "not_found_handling": "404-page"
+  },
+  "observability": { "enabled": true },
+  "vars": {
+    "CONTACT_TO": "contact@euicapital.com"
+  }
+  // Optional lead storage — create with:  npx wrangler kv namespace create LEADS
+  // "kv_namespaces": [{ "binding": "LEADS", "id": "<paste-id-here>" }]
+}
