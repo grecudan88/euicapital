@@ -465,7 +465,7 @@ const ro = {
       {
         heading: "Cine suntem",
         body: [
-          "EUI Capital este operatorul datelor cu caracter personal colectate prin acest site. Ne puteți contacta la contact@euicapital.com.",
+          "EUI Capital este operatorul datelor cu caracter personal colectate prin acest site. Ne puteți contacta la contact@euicapital.ro.",
         ],
       },
       {
@@ -1008,7 +1008,7 @@ const en: Copy = {
       {
         heading: "Who we are",
         body: [
-          "EUI Capital is the data controller for personal data collected through this website. You can reach us at contact@euicapital.com.",
+          "EUI Capital is the data controller for personal data collected through this website. You can reach us at contact@euicapital.ro.",
         ],
       },
       {

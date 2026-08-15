@@ -10,9 +10,17 @@
     "html_handling": "auto-trailing-slash",
     "not_found_handling": "404-page"
   },
+  // Both hostnames are attached to this Worker, so both resolve after deploy.
+  // The Worker folds www onto the apex; see README "Custom domain".
+  // Requires euicapital.ro to be an active zone in this Cloudflare account.
+  "routes": [
+    { "pattern": "euicapital.ro", "custom_domain": true },
+    { "pattern": "www.euicapital.ro", "custom_domain": true }
+  ],
   "observability": { "enabled": true },
   "vars": {
-    "CONTACT_TO": "contact@euicapital.com"
+    "CANONICAL_HOST": "euicapital.ro",
+    "CONTACT_TO": "contact@euicapital.ro"
   }
   // Optional lead storage — create with:  npx wrangler kv namespace create LEADS
   // "kv_namespaces": [{ "binding": "LEADS", "id": "<paste-id-here>" }]

@@ -4,9 +4,9 @@ import type { Locale } from "./locales";
 export const site = {
   name: "EUI Capital",
   legalName: "EUI Capital",
-  email: "contact@euicapital.com",
+  email: "contact@euicapital.ro",
   phone: "+40 21 000 0000",
-  url: "https://euicapital.com",
+  url: "https://euicapital.ro",
   founded: 2019,
   linkedin: "https://www.linkedin.com/company/euicapital",
 } as const;

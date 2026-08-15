@@ -5,9 +5,10 @@
  * asset layer and never reach this code. Only requests with no matching asset
  * arrive here, which is how three things get handled:
  *
- *   1. `/` — no asset exists at the root, so we land the visitor in a language.
- *   2. `/api/*` — the contact endpoint.
- *   3. Everything else — a localised 404.
+ *   1. `www.` — folded onto the canonical apex host.
+ *   2. `/` — no asset exists at the root, so we land the visitor in a language.
+ *   3. `/api/*` — the contact endpoint.
+ *   4. Everything else — a localised 404.
  */
 
 const LOCALES = ["ro", "en"] as const;
@@ -25,6 +26,8 @@ const RESPECT_BROWSER_LANGUAGE = true;
 interface Env {
   ASSETS: Fetcher;
   CONTACT_TO: string;
+  /** Apex host every request is folded onto, e.g. "euicapital.ro". */
+  CANONICAL_HOST: string;
   /** Optional secret: npx wrangler secret put RESEND_API_KEY */
   RESEND_API_KEY?: string;
   /** Optional secret: any URL that accepts a JSON POST (Slack, Zapier, n8n...) */
@@ -130,6 +133,32 @@ function pathLocale(pathname: string): Locale | null {
   return first && isLocale(first) ? first : null;
 }
 
+/**
+ * Folds www onto the apex host, preserving path and query.
+ *
+ * Only an exact `www.<canonical>` match redirects, so localhost, *.workers.dev
+ * previews and the apex itself are all left alone.
+ *
+ * Requests that match a static asset are served by Cloudflare before this
+ * Worker runs, so this alone does not cover deep links like
+ * www.euicapital.ro/ro/services/. Add the Single Redirect rule described in
+ * the README to catch those at the edge — every page also carries a canonical
+ * tag pointing at the apex, so search engines consolidate either way.
+ */
+function canonicalHostRedirect(request: Request, env: Env): Response | null {
+  const canonical = env.CANONICAL_HOST;
+  if (!canonical) return null;
+
+  const url = new URL(request.url);
+  if (url.hostname !== `www.${canonical}`) return null;
+
+  url.hostname = canonical;
+  url.protocol = "https:";
+  url.port = "";
+
+  return Response.redirect(url.toString(), 301);
+}
+
 function redirectToLocale(request: Request): Response {
   const url = new URL(request.url);
   const locale = cookieLocale(request) ?? browserLocale(request);
@@ -196,7 +225,7 @@ async function deliver(lead: Lead, env: Env, meta: Record<string, string>): Prom
         "content-type": "application/json",
       },
       body: JSON.stringify({
-        from: "EUI Capital website <website@euicapital.com>",
+        from: "EUI Capital website <website@euicapital.ro>",
         to: [env.CONTACT_TO],
         reply_to: lead.email,
         subject: `Enquiry — ${lead.organisation || lead.name}`,
@@ -270,6 +299,9 @@ async function handleContact(request: Request, env: Env): Promise<Response> {
 
 export default {
   async fetch(request, env): Promise<Response> {
+    const canonical = canonicalHostRedirect(request, env);
+    if (canonical) return canonical;
+
     const { pathname } = new URL(request.url);
 
     if (pathname === "/api/contact") return handleContact(request, env);

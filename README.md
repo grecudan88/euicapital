@@ -107,7 +107,36 @@ npm run deploy
 
 Every push to the default branch then rebuilds and ships. Pull requests get preview URLs.
 
-**Custom domain:** Workers & Pages → your Worker → *Settings* → *Domains & Routes* → add `euicapital.com`. Cloudflare issues the certificate automatically if the domain's nameservers are already with Cloudflare.
+### Domains
+
+The site is configured for **`euicapital.ro`**, with `www.euicapital.ro` folded onto it. The apex is canonical: it is what `site.url` points at, what every canonical tag and `hreflang` alternate uses, and what the sitemap lists.
+
+Both hostnames are declared in `wrangler.jsonc`:
+
+```jsonc
+"routes": [
+  { "pattern": "euicapital.ro",     "custom_domain": true },
+  { "pattern": "www.euicapital.ro", "custom_domain": true }
+]
+```
+
+`wrangler deploy` attaches both and provisions the TLS certificates, so both resolve. This requires `euicapital.ro` to be an **active zone in the same Cloudflare account** — i.e. the domain's nameservers already point at Cloudflare. If they do not, add the site in the Cloudflare dashboard first and update the nameservers at your registrar; deploys will fail on the route attachment until the zone is active.
+
+**Finish the www redirect with a Redirect Rule.** The Worker sends `www` to the apex with a 301, but Cloudflare serves matching static assets *before* the Worker runs — so `www.euicapital.ro/ro/services/` renders the page instead of redirecting. Requests with no asset behind them (`/`, `/api/*`, unknown paths) do hit the Worker and redirect correctly.
+
+To make it complete, add one rule — free, runs at the edge, costs no Worker invocations:
+
+> Cloudflare dashboard → your domain → **Rules → Redirect Rules → Create rule**
+> - **When:** `Hostname` `equals` `www.euicapital.ro`
+> - **Then:** Dynamic redirect, status **301**
+> - **Expression:** `concat("https://euicapital.ro", http.request.uri.path)`
+> - Tick **Preserve query string**
+
+Until that rule exists the site still works on both hosts and search engines consolidate on the apex via the canonical tags — the rule just makes it strict.
+
+**To use a different domain,** change three places: `site.url` and `site.email` in `src/content/site.ts`, and `routes` plus `vars.CANONICAL_HOST` in `wrangler.jsonc`. `CANONICAL_HOST` is the apex only, with no scheme and no `www.` — the Worker derives the www form from it.
+
+**Note on local testing:** with `routes` configured, `wrangler dev` rewrites the request host to the first route, so you cannot exercise the www redirect locally by sending a `Host` header. Test it after deploy, or temporarily drop `routes` from a copy of the config.
 
 ---
 
