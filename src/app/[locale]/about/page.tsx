@@ -26,7 +26,6 @@ export default async function AboutPage({ params }: { params: Promise<Params> })
   const glance: [string, string][] = [
     [t.glance.founded, String(site.founded)],
     [t.glance.offices, address],
-    [t.glance.states, "11"],
     [t.glance.focus, t.glance.focusValue],
     [t.glance.languages, t.glance.languagesValue],
   ];

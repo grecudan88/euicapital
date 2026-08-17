@@ -24,8 +24,11 @@ const ro = {
     privacy: "Confidențialitate",
     terms: "Termeni",
     rightsReserved: "Toate drepturile rezervate.",
+    regCui: "CUI",
+    regCom: "Nr. Reg. Com.",
+    regOffice: "Sediu social",
     disclaimer:
-      "EUI Capital este o societate de consultanță privată și independentă. Nu este afiliată, avizată sau împuternicită de Uniunea Europeană, de Comisia Europeană sau de vreo altă instituție, organism sau agenție a Uniunii. Sumele prezentate sunt orientative și se supun condițiilor din programul de lucru și din documentația apelului aplicabil.",
+      "European iCapital Advisory SRL este o societate de consultanță privată și independentă. Nu este afiliată, avizată sau împuternicită de Uniunea Europeană, de Comisia Europeană sau de vreo altă instituție, organism sau agenție a Uniunii. Sumele prezentate sunt orientative și se supun condițiilor din programul de lucru și din documentația apelului aplicabil.",
   },
 
   home: {
@@ -305,12 +308,11 @@ const ro = {
     glanceTitle: "Pe scurt",
     glance: {
       founded: "Înființată",
-      offices: "Birouri",
-      states: "State membre acoperite",
+      offices: "Sediu",
       focus: "Specializare",
       languages: "Limbi de lucru",
       focusValue: "Exclusiv fonduri publice europene",
-      languagesValue: "RO, EN, FR, DE",
+      languagesValue: "RO, EN",
     },
     principlesEyebrow: "Cum operăm",
     principlesTitle: "Patru principii de la care nu ne abatem",
@@ -379,6 +381,7 @@ const ro = {
     emailLabel: "E-mail",
     phoneLabel: "Telefon",
     officesLabel: "Birouri",
+    contactPersonLabel: "Persoană de contact",
     responseLabel: "Timp de răspuns",
     responseValue: "O zi lucrătoare",
     deadlineTitle: "Lucrați contra cronometru?",
@@ -460,12 +463,12 @@ const ro = {
     privacyLede: "Cum tratăm datele personale trimise prin acest site.",
     privacyMeta: "Cum colectează și prelucrează EUI Capital datele cu caracter personal.",
     privacyFootnote:
-      "Această notă este un model de pornire și nu constituie consultanță juridică. Solicitați revizuirea ei de către un specialist în protecția datelor și completați-o cu datele voastre de înregistrare înainte de lansare.",
+      "Această notă este un model de pornire și nu constituie consultanță juridică. Datele de înregistrare ale societății sunt completate; solicitați revizuirea conținutului de către un specialist în protecția datelor înainte de lansare.",
     privacySections: [
       {
         heading: "Cine suntem",
         body: [
-          "EUI Capital este operatorul datelor cu caracter personal colectate prin acest site. Ne puteți contacta la contact@euicapital.ro.",
+          "European iCapital Advisory SRL (denumire comercială EUI Capital), CUI 43390519, Nr. Reg. Com. J2020002956224, cu sediul social în Fdc. Emil Racoviță nr. 19, Mun. Iași, jud. Iași, este operatorul datelor cu caracter personal colectate prin acest site. Ne puteți contacta la contact@euicapital.ro sau la +40 726 157 163.",
         ],
       },
       {
@@ -511,12 +514,12 @@ const ro = {
     termsLede: "Condițiile în care este pus la dispoziție acest site.",
     termsMeta: "Termenii care guvernează utilizarea site-ului EUI Capital.",
     termsFootnote:
-      "Această pagină este un model de pornire și nu constituie consultanță juridică. Solicitați revizuirea ei de către un avocat și completați-o cu legea aplicabilă, numărul de înregistrare și sediul social înainte de lansare.",
+      "Această pagină este un model de pornire și nu constituie consultanță juridică. Datele de înregistrare și sediul social sunt completate; solicitați revizuirea de către un avocat și adăugarea legii aplicabile înainte de lansare.",
     termsSections: [
       {
         heading: "Fără afiliere cu instituțiile europene",
         body: [
-          "EUI Capital este o societate de consultanță privată și independentă. Nu este afiliată, avizată, acreditată sau împuternicită de Uniunea Europeană, de Comisia Europeană, de vreo agenție executivă ori de vreo autoritate de management națională sau regională.",
+          "European iCapital Advisory SRL (denumire comercială EUI Capital), CUI 43390519, Nr. Reg. Com. J2020002956224, este o societate de consultanță privată și independentă. Nu este afiliată, avizată, acreditată sau împuternicită de Uniunea Europeană, de Comisia Europeană, de vreo agenție executivă ori de vreo autoritate de management națională sau regională.",
           "Referirile la programe europene de pe acest site sunt descriptive. Ele nu presupun nicio relație cu organismele care le administrează.",
         ],
       },
@@ -542,7 +545,7 @@ const ro = {
       {
         heading: "Proprietate intelectuală",
         body: [
-          "Tot conținutul acestui site aparține EUI Capital, dacă nu se prevede altfel, și nu poate fi reprodus comercial fără acord scris.",
+          "Tot conținutul acestui site aparține European iCapital Advisory SRL, dacă nu se prevede altfel, și nu poate fi reprodus comercial fără acord scris.",
         ],
       },
       {
@@ -574,8 +577,11 @@ const en: Copy = {
     privacy: "Privacy",
     terms: "Terms",
     rightsReserved: "All rights reserved.",
+    regCui: "VAT/Tax ID",
+    regCom: "Trade Register No.",
+    regOffice: "Registered office",
     disclaimer:
-      "EUI Capital is an independent private consultancy. It is not affiliated with, endorsed by, or acting on behalf of the European Union, the European Commission or any other EU institution, body or agency. Funding figures shown are indicative and subject to the terms of the applicable work programme and call documentation.",
+      "European iCapital Advisory SRL is an independent private consultancy. It is not affiliated with, endorsed by, or acting on behalf of the European Union, the European Commission or any other EU institution, body or agency. Funding figures shown are indicative and subject to the terms of the applicable work programme and call documentation.",
   },
 
   home: {
@@ -855,12 +861,11 @@ const en: Copy = {
     glanceTitle: "At a glance",
     glance: {
       founded: "Founded",
-      offices: "Offices",
-      states: "Member States served",
+      offices: "Registered in",
       focus: "Focus",
       languages: "Working languages",
       focusValue: "EU public funding only",
-      languagesValue: "RO, EN, FR, DE",
+      languagesValue: "RO, EN",
     },
     principlesEyebrow: "How we operate",
     principlesTitle: "Four principles we do not bend",
@@ -927,6 +932,7 @@ const en: Copy = {
     emailLabel: "Email",
     phoneLabel: "Telephone",
     officesLabel: "Offices",
+    contactPersonLabel: "Contact",
     responseLabel: "Response time",
     responseValue: "One working day",
     deadlineTitle: "Working to a deadline?",
@@ -1003,12 +1009,12 @@ const en: Copy = {
     privacyLede: "How we handle personal data submitted through this website.",
     privacyMeta: "How EUI Capital collects and processes personal data.",
     privacyFootnote:
-      "This notice is a starting template and is not legal advice. Have it reviewed by a qualified data protection adviser, and complete it with your registered company details before launch.",
+      "This notice is a starting template and is not legal advice. The company registration details are filled in; have the content reviewed by a qualified data protection adviser before launch.",
     privacySections: [
       {
         heading: "Who we are",
         body: [
-          "EUI Capital is the data controller for personal data collected through this website. You can reach us at contact@euicapital.ro.",
+          "European iCapital Advisory SRL (trading as EUI Capital), tax ID 43390519, Trade Register No. J2020002956224, registered at Fdc. Emil Racoviță 19, Iași, Iași County, Romania, is the data controller for personal data collected through this website. You can reach us at contact@euicapital.ro or on +40 726 157 163.",
         ],
       },
       {
@@ -1054,12 +1060,12 @@ const en: Copy = {
     termsLede: "The terms on which this website is made available.",
     termsMeta: "Terms governing use of the EUI Capital website.",
     termsFootnote:
-      "This page is a starting template and is not legal advice. Have it reviewed by a qualified lawyer, and complete it with your governing law, registered company number and registered address before launch.",
+      "This page is a starting template and is not legal advice. The registration number and registered office are filled in; have it reviewed by a qualified lawyer and add your governing law before launch.",
     termsSections: [
       {
         heading: "No affiliation with EU institutions",
         body: [
-          "EUI Capital is an independent private consultancy. It is not affiliated with, endorsed by, accredited by, or acting on behalf of the European Union, the European Commission, any executive agency, or any national or regional managing authority.",
+          "European iCapital Advisory SRL (trading as EUI Capital), tax ID 43390519, Trade Register No. J2020002956224, is an independent private consultancy. It is not affiliated with, endorsed by, accredited by, or acting on behalf of the European Union, the European Commission, any executive agency, or any national or regional managing authority.",
           "References to EU programmes on this website are descriptive. They do not imply any relationship with the bodies that administer them.",
         ],
       },
@@ -1085,7 +1091,7 @@ const en: Copy = {
       {
         heading: "Intellectual property",
         body: [
-          "All content on this website is owned by EUI Capital unless stated otherwise, and may not be reproduced commercially without written permission.",
+          "All content on this website is owned by European iCapital Advisory SRL unless stated otherwise, and may not be reproduced commercially without written permission.",
         ],
       },
       {

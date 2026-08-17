@@ -53,7 +53,18 @@ export default async function ContactPage({ params }: { params: Promise<Params> 
                   </div>
                   <div>
                     <dt className="text-sm text-ink-600">{t.phoneLabel}</dt>
-                    <dd className="font-medium text-ink-900">{site.phone}</dd>
+                    <dd>
+                      <a
+                        href={`tel:${site.phoneHref}`}
+                        className="font-medium text-ink-900 underline decoration-gold-400 underline-offset-4"
+                      >
+                        {site.phone}
+                      </a>
+                    </dd>
+                  </div>
+                  <div>
+                    <dt className="text-sm text-ink-600">{t.contactPersonLabel}</dt>
+                    <dd className="font-medium text-ink-900">{site.contactPerson}</dd>
                   </div>
                   <div>
                     <dt className="text-sm text-ink-600">{t.officesLabel}</dt>

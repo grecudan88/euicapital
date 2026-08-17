@@ -8,7 +8,7 @@ import { Container } from "./ui";
 
 export function SiteFooter({ locale }: { locale: Locale }) {
   const copy = getCopy(locale);
-  const { nav, description, address } = siteCopy[locale];
+  const { nav, description, address, registeredAddress } = siteCopy[locale];
   const programmes = getProgrammes(locale);
 
   return (
@@ -24,7 +24,11 @@ export function SiteFooter({ locale }: { locale: Locale }) {
                   {site.email}
                 </a>
               </p>
-              <p className="text-ink-400">{site.phone}</p>
+              <p>
+                <a href={`tel:${site.phoneHref}`} className="text-paper hover:text-gold-400">
+                  {site.phone}
+                </a>
+              </p>
               <p className="text-ink-400">{address}</p>
             </div>
             <div className="mt-6">
@@ -72,7 +76,13 @@ export function SiteFooter({ locale }: { locale: Locale }) {
         </div>
 
         <div className="mt-14 border-t border-white/10 pt-8">
-          <p className="max-w-3xl text-xs leading-relaxed text-ink-400">{copy.ui.disclaimer}</p>
+          <p className="max-w-3xl text-xs leading-relaxed text-ink-200">
+            {site.legalName} · {copy.ui.regCom} {site.regCom} · {copy.ui.regCui} {site.cui} ·{" "}
+            {copy.ui.regOffice}: {registeredAddress}
+          </p>
+          <p className="mt-4 max-w-3xl text-xs leading-relaxed text-ink-400">
+            {copy.ui.disclaimer}
+          </p>
           <div className="mt-6 flex flex-col justify-between gap-4 text-xs text-ink-400 sm:flex-row">
             <p>
               &copy; {site.founded}&ndash;{new Date().getFullYear()} {site.legalName}.{" "}

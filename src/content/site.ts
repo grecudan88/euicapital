@@ -1,20 +1,35 @@
 import type { Locale } from "./locales";
 
-/** Locale-independent facts about the company. */
+/**
+ * Locale-independent facts about the company.
+ *
+ * Registration details verified against the ANAF public register (CUI 43390519).
+ * `name` is the trading brand; `legalName` is what must appear on invoices and
+ * in the legally required identification block in the footer.
+ */
 export const site = {
   name: "EUI Capital",
-  legalName: "EUI Capital",
+  legalName: "European iCapital Advisory SRL",
+  cui: "43390519",
+  regCom: "J2020002956224",
+  caen: "7020",
   email: "contact@euicapital.ro",
-  phone: "+40 21 000 0000",
+  /** Display form of 0726157163. */
+  phone: "+40 726 157 163",
+  phoneHref: "+40726157163",
+  contactPerson: "Dan Grecu",
   url: "https://euicapital.ro",
-  founded: 2019,
+  founded: 2020,
   linkedin: "https://www.linkedin.com/company/euicapital",
 } as const;
 
 type SiteCopy = {
   tagline: string;
   description: string;
+  /** Short form for headers and contact cards. */
   address: string;
+  /** Registered office, exactly as recorded at the trade register. */
+  registeredAddress: string;
   nav: { path: string; label: string }[];
   stats: { value: string; label: string }[];
 };
@@ -37,7 +52,8 @@ export const siteCopy: Record<Locale, SiteCopy> = {
     tagline: "Finanțare europeană, construită corect.",
     description:
       "Consultanță independentă care ajută companiile, organizațiile de cercetare și instituțiile publice să identifice, să câștige și să implementeze finanțare europeană.",
-    address: "București · Bruxelles",
+    address: "Iași, România",
+    registeredAddress: "Fdc. Emil Racoviță nr. 19, Mun. Iași, jud. Iași",
     nav: [
       { path: "services", label: "Servicii" },
       { path: "programmes", label: "Programe" },
@@ -54,7 +70,8 @@ export const siteCopy: Record<Locale, SiteCopy> = {
     tagline: "EU funding, engineered.",
     description:
       "Independent consultancy helping companies, research organisations and public bodies find, win and deliver European Union funding.",
-    address: "Bucharest · Brussels",
+    address: "Iași, Romania",
+    registeredAddress: "Fdc. Emil Racoviță 19, Iași, Iași County, Romania",
     nav: [
       { path: "services", label: "Services" },
       { path: "programmes", label: "Programmes" },
