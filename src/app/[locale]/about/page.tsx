@@ -80,6 +80,19 @@ export default async function AboutPage({ params }: { params: Promise<Params> })
 
       <section className="bg-paper-warm py-20 sm:py-24">
         <Container>
+          <SectionHeading eyebrow={t.stanceEyebrow} title={t.stanceTitle} />
+          <div className="mt-8 grid gap-8 md:grid-cols-3">
+            {t.stance.map((paragraph) => (
+              <p key={paragraph} className="hairline pt-6 text-[15px] leading-relaxed text-ink-700">
+                {paragraph}
+              </p>
+            ))}
+          </div>
+        </Container>
+      </section>
+
+      <section className="bg-paper py-20 sm:py-24">
+        <Container>
           <SectionHeading
             eyebrow={t.principlesEyebrow}
             title={t.principlesTitle}
@@ -96,7 +109,7 @@ export default async function AboutPage({ params }: { params: Promise<Params> })
         </Container>
       </section>
 
-      <section className="bg-paper py-20 sm:py-24">
+      <section className="bg-paper-warm py-20 sm:py-24">
         <Container>
           <SectionHeading eyebrow={t.teamEyebrow} title={t.teamTitle} lede={t.teamLede} />
           <div className="mt-12 grid max-w-3xl gap-6 sm:grid-cols-2">

@@ -305,8 +305,14 @@ const ro = {
     positionOutro: [
       "Doar noi doi — cu experiența, disciplina și atenția la detalii pe care le-am câștigat în sute de ore de analiză, scriere și implementare. Lucrăm puține proiecte, dar le lucrăm bine. Ne implicăm personal în fiecare etapă, de la prima discuție până la depunere și clarificări.",
       "Pentru noi, un proiect nu e un fișier. E o responsabilitate. E promisiunea că dacă spunem „merită să aplici”, atunci chiar merită. Și dacă spunem „nu are șanse”, o facem ca să te protejăm — nu ca să pierdem un client.",
-      "Tot din start spunem și asta: suntem o firmă privată, independentă. Nu facem parte din Uniunea Europeană și nu decidem cine primește finanțare. Nimeni nu poate garanta un grant, iar cine îți promite altceva îți vinde altceva. Ce putem influența este potrivirea cu apelul, forța argumentului și disciplina implementării. Exact acolo lucrăm.",
       "Suntem aici să explicăm, să ghidăm, să filtrăm, să construim. Suntem aici să facem consultanță așa cum ar trebui să fie: personală, senior-level, transparentă și fără compromisuri.",
+    ],
+    stanceEyebrow: "Poziția noastră",
+    stanceTitle: "Independenți, și o spunem clar",
+    stance: [
+      "EUI Capital este o societate de consultanță privată, de tip boutique. Nu facem parte din Uniunea Europeană și nu decidem cine primește finanțare. Ce facem este să înțelegem cum se ia decizia și să pregătim solicitanții în consecință.",
+      "Distincția contează. Nimeni nu poate garanta un grant, iar orice consultant care sugerează altceva vinde iluzii. Ce se poate îmbunătăți este acuratețea identificării finanțării potrivite, forța argumentului și disciplina implementării — iar aceste trei lucruri mișcă rata de succes foarte mult.",
+      "Lucrăm atât cu programe în gestiune directă, derulate de Uniunea Europeană, cât și cu fonduri în gestiune partajată, administrate de autorități naționale și regionale (PNRR sau scheme guvernamentale). Clienții noștri sunt IMM-uri care caută dezvoltare, organizații de cercetare care construiesc inovare și instituții publice cu programe de investiții și sociale de finanțat.",
     ],
     glanceTitle: "Pe scurt",
     glance: {
@@ -843,8 +849,14 @@ const en: Copy = {
     positionOutro: [
       "Just the two of us — with the experience, discipline and attention to detail earned over hundreds of hours of analysis, drafting and delivery. We take on few projects, and we do them properly. We are personally involved at every stage, from the first conversation through to submission and clarifications.",
       "To us a project is not a file. It is a responsibility. It is the promise that when we say “this is worth applying for”, it genuinely is. And when we say “this has no chance”, we say it to protect you — even when it costs us the work.",
-      "We say this up front too: we are a private, independent firm. We are not part of the European Union and we do not decide who gets funded. Nobody can guarantee a grant, and anyone who promises otherwise is selling you something else. What we can influence is the fit with the call, the strength of the argument and the discipline of the delivery. That is exactly where we work.",
       "We are here to explain, to guide, to filter, to build. We are here to do consultancy the way it should be done: personal, senior-level, transparent, and without compromise.",
+    ],
+    stanceEyebrow: "Our position",
+    stanceTitle: "Independent, and clear about it",
+    stance: [
+      "EUI Capital is a private, boutique consultancy. We are not part of the European Union and we do not decide who gets funded. What we do is understand how the decision is made, and prepare applicants accordingly.",
+      "That distinction matters. Nobody can guarantee a grant, and any adviser who suggests otherwise is selling illusions. What can be improved is the accuracy with which the right funding is identified, the strength of the argument, and the discipline of the delivery — and those three things move success rates a very long way.",
+      "We work across direct-management programmes run by the European Union and shared-management funds administered by national and regional authorities (Romania's NRRP and government schemes). Our clients are SMEs looking to grow, research organisations building innovation, and public bodies with capital and social programmes to finance.",
     ],
     glanceTitle: "At a glance",
     glance: {
