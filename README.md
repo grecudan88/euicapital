@@ -200,6 +200,7 @@ Everything below is placeholder text written to demonstrate layout. Replace it.
 - [ ] **`callSnapshot` in `src/content/programmes.ts`** — the only time-sensitive figure on the site. It records how many calls were open on a given date and prints that date next to the numbers. Refresh it from the [MIPE calendar](https://mfe.gov.ro/calendar-apeluri-de-finantare/) periodically; a snapshot dated months ago reads as neglect. Everything else in that file describes programme scope and eligibility, which changes rarely.
 - [ ] **`legal` in `src/content/pages.ts`** — the privacy notice and terms are templates, not legal advice. Have a lawyer review them and add your registered company number, registered address and governing law.
 - [ ] **`public/`** — add `favicon.ico`, an `apple-touch-icon.png` and an Open Graph image (1200×630).
+- [ ] **Team photos** — drop a square JPEG in `public/echipa/`, then set `photo` for that person in `src/content/pages.ts` in **both** locales, e.g. `photo: "/echipa/dan-grecu.jpg"`. Around 512×512 and under ~60 KB works well; the card renders it at 80px in a circle, so the face wants to sit in the upper half of the crop. Leave `photo` empty and the card falls back to an initial on a dark disc.
 - [ ] **`site.url`** in `src/content/site.ts` — must be your real domain; it drives canonical URLs, the sitemap and Open Graph tags.
 
 ### A note on positioning

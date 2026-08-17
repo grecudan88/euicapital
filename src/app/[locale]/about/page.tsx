@@ -115,11 +115,23 @@ export default async function AboutPage({ params }: { params: Promise<Params> })
           <div className="mt-12 grid max-w-3xl gap-6 sm:grid-cols-2">
             {t.team.map((member) => (
               <div key={member.name} className="rounded-2xl border border-ink-900/10 bg-white p-7">
-                <div className="flex h-12 w-12 items-center justify-center rounded-full bg-ink-950">
-                  <span className="font-display text-lg text-gold-400">
-                    {member.name.charAt(0)}
-                  </span>
-                </div>
+                {member.photo ? (
+                  <img
+                    src={member.photo}
+                    alt={member.name}
+                    width={80}
+                    height={80}
+                    loading="lazy"
+                    decoding="async"
+                    className="h-20 w-20 rounded-full object-cover object-top ring-1 ring-ink-900/10"
+                  />
+                ) : (
+                  <div className="flex h-20 w-20 items-center justify-center rounded-full bg-ink-950">
+                    <span className="font-display text-2xl text-gold-400">
+                      {member.name.charAt(0)}
+                    </span>
+                  </div>
+                )}
                 <h3 className="mt-5 font-display text-lg text-ink-950">{member.name}</h3>
                 <p className="mt-1 text-sm font-medium text-gold-600">{member.role}</p>
                 {/* Rendered only once real copy exists — never show an empty line. */}

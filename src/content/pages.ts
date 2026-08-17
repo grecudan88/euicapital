@@ -358,9 +358,17 @@ const ro = {
     // `focus` and `background` are intentionally empty: they describe real
     // people, so they stay blank until Dan and Codrina supply their own text.
     // The cards render name and role only while these are empty.
+    // `photo` is a path under /public, e.g. "/echipa/dan-grecu.jpg". Empty
+    // falls back to the initial avatar. Use a real photograph of the person.
     team: [
-      { name: "Dan Grecu", role: "Consultant senior", focus: "", background: "" },
-      { name: "Codrina Crețu", role: "Consultant senior", focus: "", background: "" },
+      {
+        name: "Dan Grecu",
+        role: "Consultant senior",
+        focus: "",
+        background: "",
+        photo: "/echipa/dan-grecu.jpg",
+      },
+      { name: "Codrina Crețu", role: "Consultant senior", focus: "", background: "", photo: "" },
     ],
     ctaTitle: "Lucrați cu noi",
     ctaLede: "Începeți cu o discuție gratuită de eligibilitate. Fără obligații, în niciun sens.",
@@ -906,8 +914,14 @@ const en: Copy = {
     teamLede:
       "Two senior consultants. You work with them directly, from the first call to project closure.",
     team: [
-      { name: "Dan Grecu", role: "Senior consultant", focus: "", background: "" },
-      { name: "Codrina Crețu", role: "Senior consultant", focus: "", background: "" },
+      {
+        name: "Dan Grecu",
+        role: "Senior consultant",
+        focus: "",
+        background: "",
+        photo: "/echipa/dan-grecu.jpg",
+      },
+      { name: "Codrina Crețu", role: "Senior consultant", focus: "", background: "", photo: "" },
     ],
     ctaTitle: "Work with us",
     ctaLede: "Start with a free eligibility call. No commitment either way.",
