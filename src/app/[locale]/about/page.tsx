@@ -87,7 +87,7 @@ export default async function AboutPage({ params }: { params: Promise<Params> })
       <section className="bg-paper py-20 sm:py-24">
         <Container>
           <SectionHeading eyebrow={t.teamEyebrow} title={t.teamTitle} lede={t.teamLede} />
-          <div className="mt-12 grid gap-6 sm:grid-cols-2">
+          <div className="mt-12 grid max-w-3xl gap-6 sm:grid-cols-2">
             {t.team.map((member) => (
               <div key={member.name} className="rounded-2xl border border-ink-900/10 bg-white p-7">
                 <div className="flex h-12 w-12 items-center justify-center rounded-full bg-ink-950">
@@ -96,8 +96,16 @@ export default async function AboutPage({ params }: { params: Promise<Params> })
                   </span>
                 </div>
                 <h3 className="mt-5 font-display text-lg text-ink-950">{member.name}</h3>
-                <p className="mt-1 text-sm font-medium text-gold-600">{member.focus}</p>
-                <p className="mt-3 text-[15px] leading-relaxed text-ink-700">{member.background}</p>
+                <p className="mt-1 text-sm font-medium text-gold-600">{member.role}</p>
+                {/* Rendered only once real copy exists — never show an empty line. */}
+                {member.focus ? (
+                  <p className="mt-3 text-sm text-ink-600">{member.focus}</p>
+                ) : null}
+                {member.background ? (
+                  <p className="mt-3 text-[15px] leading-relaxed text-ink-700">
+                    {member.background}
+                  </p>
+                ) : null}
               </div>
             ))}
           </div>

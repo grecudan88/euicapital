@@ -339,31 +339,13 @@ const ro = {
     teamEyebrow: "Echipa",
     teamTitle: "Cu cine lucrați efectiv",
     teamLede:
-      "Înlocuiți aceste profiluri demonstrative cu numele, fotografiile și experiența consultanților voștri înainte de lansare.",
+      "Doi consultanți seniori. Lucrați direct cu ei, de la prima discuție până la închiderea proiectului.",
+    // `focus` and `background` are intentionally empty: they describe real
+    // people, so they stay blank until Dan and Codrina supply their own text.
+    // The cards render name and role only while these are empty.
     team: [
-      {
-        name: "Consultant senior — Inovare",
-        focus: "Orizont Europa, EIC, Fondul pentru Inovare",
-        background:
-          "Fost punct național de contact, cu experiență în evaluarea programelor industriale de cercetare-dezvoltare.",
-      },
-      {
-        name: "Consultant senior — Coeziune",
-        focus: "FEDR, FSE+, Interreg, PAC",
-        background:
-          "Doisprezece ani într-o autoritate de management regională, apoi consultanță pentru solicitanți.",
-      },
-      {
-        name: "Manager financiar",
-        focus: "Bugete, eligibilitatea costurilor, audit",
-        background: "Contabil autorizat, specializat în raportarea financiară a granturilor europene.",
-      },
-      {
-        name: "Coordonator de consorții",
-        focus: "Căutare de parteneri, negociere, guvernanță",
-        background:
-          "A coordonat consorții de cercetare multinaționale pentru un institut european de cercetare.",
-      },
+      { name: "Dan Grecu", role: "Consultant senior", focus: "", background: "" },
+      { name: "Codrina Crețu", role: "Consultant senior", focus: "", background: "" },
     ],
     ctaTitle: "Lucrați cu noi",
     ctaLede: "Începeți cu o discuție gratuită de eligibilitate. Fără obligații, în niciun sens.",
@@ -892,29 +874,10 @@ const en: Copy = {
     teamEyebrow: "The team",
     teamTitle: "Who you actually work with",
     teamLede:
-      "Replace these placeholders with your consultants' names, photographs and profiles before launch.",
+      "Two senior consultants. You work with them directly, from the first call to project closure.",
     team: [
-      {
-        name: "Senior consultant — Innovation",
-        focus: "Horizon Europe, EIC, Innovation Fund",
-        background:
-          "Former national contact point, background in industrial R&D programme evaluation.",
-      },
-      {
-        name: "Senior consultant — Cohesion",
-        focus: "ERDF, ESF+, Interreg, CAP",
-        background: "Twelve years inside a regional managing authority, then advising applicants.",
-      },
-      {
-        name: "Financial manager",
-        focus: "Budgets, cost eligibility, audit",
-        background: "Chartered accountant specialising in EU grant financial reporting.",
-      },
-      {
-        name: "Consortium lead",
-        focus: "Partner search, negotiation, governance",
-        background: "Coordinated multi-country research consortia for a European research institute.",
-      },
+      { name: "Dan Grecu", role: "Senior consultant", focus: "", background: "" },
+      { name: "Codrina Crețu", role: "Senior consultant", focus: "", background: "" },
     ],
     ctaTitle: "Work with us",
     ctaLede: "Start with a free eligibility call. No commitment either way.",
