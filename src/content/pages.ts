@@ -291,16 +291,21 @@ const ro = {
   about: {
     metaTitle: "Despre noi",
     metaDescription:
-      "EUI Capital este o societate independentă de consultanță în fonduri europene, care lucrează cu companii, organizații de cercetare și instituții publice din Uniunea Europeană.",
+      "Doi consultanți seniori care lucrează personal fiecare proiect de finanțare europeană, de la prima discuție până la depunere și clarificări. Fără juniori, fără outsourcing.",
     eyebrow: "Despre noi",
-    title: "O firmă mică, care face un singur lucru",
-    lede: "EUI Capital consiliază organizații din întreaga Uniune Europeană în identificarea, câștigarea și implementarea finanțării publice. Nu facem marketing, nu facem consultanță generală de management și nu luăm proiecte despre care nu credem că pot câștiga.",
-    positionEyebrow: "Poziția noastră",
-    positionTitle: "Independenți, și o spunem clar",
-    position: [
-      "EUI Capital este o societate de consultanță privată. Nu facem parte din Uniunea Europeană și nu decidem cine primește finanțare. Ce facem este să înțelegem cum se ia decizia și să pregătim solicitanții în consecință.",
-      "Distincția contează. Nimeni nu poate garanta un grant, iar orice consultant care sugerează altceva vinde altceva. Ce se poate îmbunătăți este calitatea potrivirii, forța argumentului și disciplina implementării — iar aceste trei lucruri mișcă rata de succes foarte mult.",
-      "Lucrăm atât cu programe în gestiune directă, derulate de la Bruxelles, cât și cu fonduri în gestiune partajată, administrate de autorități naționale și regionale. Clienții noștri sunt companii mijlocii care scalează o tehnologie, organizații de cercetare care construiesc consorții și instituții publice cu programe de investiții și sociale de finanțat.",
+    title: "Două minți. Zero compromisuri.",
+    lede: "Consultanță făcută ca pentru propriul nostru proiect.",
+    positionEyebrow: "Povestea noastră",
+    positionTitle: "Am început prin a repara proiectele altora",
+    positionIntro: [
+      "Totul a început simplu: doi consultanți seniori, obișnuiți să repare proiecte făcute greșit de alții. Ani la rând am văzut dosare incomplete, promisiuni nerealiste și antreprenori care plăteau scump pentru greșelile altora.",
+      "Așa că am decis să lucrăm altfel.",
+    ],
+    positionPull: "Fără juniori. Fără outsourcing. Fără „lasă că vedem noi”.",
+    positionOutro: [
+      "Doar noi doi — cu experiența, disciplina și atenția la detalii pe care le-am câștigat în sute de ore de analiză, scriere și implementare. Lucrăm puține proiecte, dar le lucrăm bine. Ne implicăm personal în fiecare etapă, de la prima discuție până la depunere și clarificări.",
+      "Pentru noi, un proiect nu e un fișier. E o responsabilitate. E promisiunea că dacă spunem „merită să aplici”, atunci chiar merită. Și dacă spunem „nu are șanse”, o facem ca să te protejăm — nu ca să pierdem un client.",
+      "Suntem aici să explicăm, să ghidăm, să filtrăm, să construim. Suntem aici să facem consultanță așa cum ar trebui să fie: personală, senior-level, transparentă și fără compromisuri.",
     ],
     glanceTitle: "Pe scurt",
     glance: {
@@ -823,16 +828,21 @@ const en: Copy = {
   about: {
     metaTitle: "About",
     metaDescription:
-      "EUI Capital is an independent EU funding consultancy working with companies, research organisations and public bodies across the European Union.",
+      "Two senior consultants who personally handle every EU funding project, from the first conversation to submission and clarifications. No juniors, no outsourcing.",
     eyebrow: "About",
-    title: "A small firm that only does one thing",
-    lede: "EUI Capital advises organisations across the European Union on finding, winning and delivering public funding. We do not do marketing, we do not do general management consulting, and we do not take on projects we do not think can win.",
-    positionEyebrow: "Our position",
-    positionTitle: "Independent, and clear about it",
-    position: [
-      "EUI Capital is a private consultancy. We are not part of the European Union and we do not decide who gets funded. What we do is understand how the decision is made, and prepare applicants accordingly.",
-      "That distinction matters. Nobody can guarantee a grant, and any adviser who suggests otherwise is selling something else. What can be improved is the quality of the fit, the strength of the argument, and the discipline of the delivery — and those three things move success rates a very long way.",
-      "We work across direct-management programmes run from Brussels and shared-management funds administered by national and regional authorities. Our clients are mid-sized companies scaling a technology, research organisations building consortia, and public bodies with capital and social programmes to finance.",
+    title: "Two minds. Zero compromises.",
+    lede: "Consultancy done the way we would do it for our own project.",
+    positionEyebrow: "Our story",
+    positionTitle: "We started out fixing other people's projects",
+    positionIntro: [
+      "It started simply: two senior consultants, used to repairing projects other people had got wrong. For years we saw incomplete files, unrealistic promises, and business owners paying dearly for somebody else's mistakes.",
+      "So we decided to work differently.",
+    ],
+    positionPull: "No juniors. No outsourcing. No “we'll sort it out later”.",
+    positionOutro: [
+      "Just the two of us — with the experience, discipline and attention to detail earned over hundreds of hours of analysis, drafting and delivery. We take on few projects, and we do them properly. We are personally involved at every stage, from the first conversation through to submission and clarifications.",
+      "To us a project is not a file. It is a responsibility. It is the promise that when we say “this is worth applying for”, it genuinely is. And when we say “this has no chance”, we say it to protect you — even when it costs us the work.",
+      "We are here to explain, to guide, to filter, to build. We are here to do consultancy the way it should be done: personal, senior-level, transparent, and without compromise.",
     ],
     glanceTitle: "At a glance",
     glance: {

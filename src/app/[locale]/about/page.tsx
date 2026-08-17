@@ -40,7 +40,19 @@ export default async function AboutPage({ params }: { params: Promise<Params> })
             <div className="max-w-2xl">
               <SectionHeading eyebrow={t.positionEyebrow} title={t.positionTitle} />
               <div className="mt-6 space-y-5 text-[17px] leading-relaxed text-ink-700">
-                {t.position.map((paragraph) => (
+                {t.positionIntro.map((paragraph) => (
+                  <p key={paragraph}>{paragraph}</p>
+                ))}
+              </div>
+
+              {/* The three refusals are the whole positioning — they get their
+                  own line rather than being buried mid-paragraph. */}
+              <p className="my-9 border-l-2 border-gold-500 pl-6 font-display text-2xl leading-snug text-ink-950 sm:text-[1.75rem]">
+                {t.positionPull}
+              </p>
+
+              <div className="space-y-5 text-[17px] leading-relaxed text-ink-700">
+                {t.positionOutro.map((paragraph) => (
                   <p key={paragraph}>{paragraph}</p>
                 ))}
               </div>
