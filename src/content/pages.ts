@@ -305,6 +305,7 @@ const ro = {
     positionOutro: [
       "Doar noi doi — cu experiența, disciplina și atenția la detalii pe care le-am câștigat în sute de ore de analiză, scriere și implementare. Lucrăm puține proiecte, dar le lucrăm bine. Ne implicăm personal în fiecare etapă, de la prima discuție până la depunere și clarificări.",
       "Pentru noi, un proiect nu e un fișier. E o responsabilitate. E promisiunea că dacă spunem „merită să aplici”, atunci chiar merită. Și dacă spunem „nu are șanse”, o facem ca să te protejăm — nu ca să pierdem un client.",
+      "Tot din start spunem și asta: suntem o firmă privată, independentă. Nu facem parte din Uniunea Europeană și nu decidem cine primește finanțare. Nimeni nu poate garanta un grant, iar cine îți promite altceva îți vinde altceva. Ce putem influența este potrivirea cu apelul, forța argumentului și disciplina implementării. Exact acolo lucrăm.",
       "Suntem aici să explicăm, să ghidăm, să filtrăm, să construim. Suntem aici să facem consultanță așa cum ar trebui să fie: personală, senior-level, transparentă și fără compromisuri.",
     ],
     glanceTitle: "Pe scurt",
@@ -842,6 +843,7 @@ const en: Copy = {
     positionOutro: [
       "Just the two of us — with the experience, discipline and attention to detail earned over hundreds of hours of analysis, drafting and delivery. We take on few projects, and we do them properly. We are personally involved at every stage, from the first conversation through to submission and clarifications.",
       "To us a project is not a file. It is a responsibility. It is the promise that when we say “this is worth applying for”, it genuinely is. And when we say “this has no chance”, we say it to protect you — even when it costs us the work.",
+      "We say this up front too: we are a private, independent firm. We are not part of the European Union and we do not decide who gets funded. Nobody can guarantee a grant, and anyone who promises otherwise is selling you something else. What we can influence is the fit with the call, the strength of the argument and the discipline of the delivery. That is exactly where we work.",
       "We are here to explain, to guide, to filter, to build. We are here to do consultancy the way it should be done: personal, senior-level, transparent, and without compromise.",
     ],
     glanceTitle: "At a glance",
