@@ -266,7 +266,7 @@ const text: Record<Locale, Record<ProgrammeSlug, ProgrammeText>> = {
         "Schemă finanțată din Fondul pentru Modernizare, administrată de Ministerul Transporturilor și Infrastructurii. Acoperă înlocuirea vehiculelor poluante din parcul auto propriu al companiilor și din transportul public de călători cu vehicule cu zero emisii, prin două măsuri de finanțare distincte — una de ajutor de stat, cealaltă de minimis. Schema a fost revizuită prin OMTI nr. 742/2026, publicat în Monitorul Oficial nr. 655 din 7 august 2026.",
       bestFor: [
         "Firme cu flotă proprie care trec la vehicule electrice",
-        "Operatori de transport public de persoane, inclusiv societăți deținute de autorități locale",
+        "Operatori de transport public de persoane",
         "Companii de logistică și distribuție",
       ],
       watchOut:
@@ -441,7 +441,7 @@ const text: Record<Locale, Record<ProgrammeSlug, ProgrammeText>> = {
         "A Modernisation Fund scheme run by the Ministry of Transport and Infrastructure. It covers replacing polluting vehicles in company fleets and in public passenger transport with zero-emission vehicles, through two separate financing measures — one state aid, one de minimis. The scheme was revised by Ministerial Order 742/2026, published in the Official Gazette no. 655 of 7 August 2026.",
       bestFor: [
         "Companies with their own fleet moving to electric vehicles",
-        "Public passenger transport operators, including companies owned by local authorities",
+        "Public passenger transport operators",
         "Logistics and distribution companies",
       ],
       watchOut:
