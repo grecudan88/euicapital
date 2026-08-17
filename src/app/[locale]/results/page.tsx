@@ -29,19 +29,6 @@ export default async function ResultsPage({ params }: { params: Promise<Params> 
     <>
       <PageHero eyebrow={t.eyebrow} title={t.title} lede={t.lede} />
 
-      {/* PLACEHOLDER BANNER — delete this block once src/content/results.ts holds real engagements. */}
-      <div className="bg-gold-200/60">
-        <Container className="py-4">
-          <p className="text-sm text-ink-800">
-            <strong className="font-semibold">{t.placeholderStrong}</strong> {t.placeholderBody}{" "}
-            <code className="rounded bg-white/70 px-1.5 py-0.5 font-mono text-[13px]">
-              src/content/results.ts
-            </code>{" "}
-            {t.placeholderEnd}
-          </p>
-        </Container>
-      </div>
-
       <section className="border-b border-ink-900/10 bg-white">
         <Container>
           <dl className="grid max-w-2xl grid-cols-1 gap-8 py-12 sm:grid-cols-2">
@@ -65,45 +52,61 @@ export default async function ResultsPage({ params }: { params: Promise<Params> 
               >
                 <div>
                   <p className="font-display text-4xl text-gold-600">{study.amount}</p>
-                  <h2 className="mt-4 font-display text-xl leading-snug text-ink-950">
-                    {study.client}
-                  </h2>
-                  <p className="mt-2 text-sm text-ink-600">{study.programme}</p>
-                  <div className="mt-4 flex flex-wrap gap-2">
-                    <Tag>{study.sector}</Tag>
-                    <Tag>{study.year}</Tag>
-                  </div>
+                  <p className="mt-2 text-sm font-medium text-ink-900">{study.programme}</p>
+                  {study.client ? (
+                    <h2 className="mt-4 font-display text-xl leading-snug text-ink-950">
+                      {study.client}
+                    </h2>
+                  ) : null}
+                  {study.sector || study.year ? (
+                    <div className="mt-4 flex flex-wrap gap-2">
+                      {study.sector ? <Tag>{study.sector}</Tag> : null}
+                      {study.year ? <Tag>{study.year}</Tag> : null}
+                    </div>
+                  ) : null}
                 </div>
 
-                <div className="space-y-6">
-                  <div>
-                    <h3 className="text-xs font-semibold uppercase tracking-[0.14em] text-ink-400">
-                      {t.situation}
-                    </h3>
-                    <p className="mt-2 text-[15px] leading-relaxed text-ink-700">
-                      {study.challenge}
-                    </p>
+                {/* Only rendered once the narrative exists — never an empty heading. */}
+                {study.challenge || study.approach.length > 0 || study.result ? (
+                  <div className="space-y-6">
+                    {study.challenge ? (
+                      <div>
+                        <h3 className="text-xs font-semibold uppercase tracking-[0.14em] text-ink-400">
+                          {t.situation}
+                        </h3>
+                        <p className="mt-2 text-[15px] leading-relaxed text-ink-700">
+                          {study.challenge}
+                        </p>
+                      </div>
+                    ) : null}
+                    {study.approach.length > 0 ? (
+                      <div>
+                        <h3 className="text-xs font-semibold uppercase tracking-[0.14em] text-ink-400">
+                          {t.whatWeDid}
+                        </h3>
+                        <ul className="mt-2 space-y-2">
+                          {study.approach.map((a) => (
+                            <li
+                              key={a}
+                              className="flex gap-3 text-[15px] leading-relaxed text-ink-700"
+                            >
+                              <span
+                                aria-hidden
+                                className="mt-2 h-1 w-1 shrink-0 rounded-full bg-gold-500"
+                              />
+                              {a}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    ) : null}
+                    {study.result ? (
+                      <p className="border-l-2 border-gold-400 pl-5 text-[15px] font-medium text-ink-900">
+                        {study.result}
+                      </p>
+                    ) : null}
                   </div>
-                  <div>
-                    <h3 className="text-xs font-semibold uppercase tracking-[0.14em] text-ink-400">
-                      {t.whatWeDid}
-                    </h3>
-                    <ul className="mt-2 space-y-2">
-                      {study.approach.map((a) => (
-                        <li key={a} className="flex gap-3 text-[15px] leading-relaxed text-ink-700">
-                          <span
-                            aria-hidden
-                            className="mt-2 h-1 w-1 shrink-0 rounded-full bg-gold-500"
-                          />
-                          {a}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                  <p className="border-l-2 border-gold-400 pl-5 text-[15px] font-medium text-ink-900">
-                    {study.result}
-                  </p>
-                </div>
+                ) : null}
               </article>
             ))}
           </div>

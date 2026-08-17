@@ -275,13 +275,17 @@ function Results({ locale }: { locale: Locale }) {
           </Link>
         </div>
 
-        <div className="mt-12 grid gap-6 md:grid-cols-3">
+        <div className="mt-12 grid max-w-3xl gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {caseStudies.slice(0, 3).map((c) => (
             <Card key={c.slug} className="flex flex-col">
               <p className="font-display text-3xl text-gold-600">{c.amount}</p>
               <p className="mt-1 text-xs uppercase tracking-[0.12em] text-ink-400">{c.programme}</p>
-              <h3 className="mt-4 font-display text-lg text-ink-950">{c.client}</h3>
-              <p className="mt-3 flex-1 text-[15px] leading-relaxed text-ink-700">{c.result}</p>
+              {c.client ? (
+                <h3 className="mt-4 font-display text-lg text-ink-950">{c.client}</h3>
+              ) : null}
+              {c.result ? (
+                <p className="mt-3 flex-1 text-[15px] leading-relaxed text-ink-700">{c.result}</p>
+              ) : null}
             </Card>
           ))}
         </div>
