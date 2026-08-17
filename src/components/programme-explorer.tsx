@@ -8,6 +8,7 @@ import {
   categoryKeys,
   categoryLabels,
   getProgrammes,
+  statusLabels,
   type Audience,
   type CategoryKey,
 } from "@/content/programmes";
@@ -26,6 +27,7 @@ export function ProgrammeExplorer({ locale }: { locale: Locale }) {
   const t = getCopy(locale).programmes;
   const labels = categoryLabels[locale];
   const who = audienceLabels[locale];
+  const statusText = statusLabels[locale];
   const programmes = useMemo(() => getProgrammes(locale), [locale]);
 
   const filtered = useMemo(() => {
@@ -136,6 +138,12 @@ export function ProgrammeExplorer({ locale }: { locale: Locale }) {
                 </div>
               </div>
               <h3 className="mt-4 font-display text-xl leading-snug text-ink-950">{p.name}</h3>
+              {p.status ? (
+                <p className="mt-2 inline-flex w-fit items-center gap-1.5 rounded-full bg-ink-900/5 px-2.5 py-1 text-xs font-medium text-ink-700">
+                  <span aria-hidden className="h-1.5 w-1.5 rounded-full bg-gold-500" />
+                  {statusText[p.status]}
+                </p>
+              ) : null}
               <p className="mt-3 flex-1 text-[15px] leading-relaxed text-ink-700">{p.summary}</p>
 
               <dl className="mt-6 grid gap-4 border-t border-ink-900/10 pt-5 text-sm sm:grid-cols-2">

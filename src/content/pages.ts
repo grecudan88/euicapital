@@ -167,6 +167,8 @@ const ro = {
       "Trimiteți-ne o descriere scurtă a proiectului. Vă spunem dacă acest instrument se potrivește și care este alternativa mai bună dacă nu.",
     sidebarCta: "Cereți o evaluare",
     alsoIn: (category: string) => `Tot în ${category}`,
+    upcomingNote:
+      "Schema a fost aprobată și bugetul este alocat, dar Ministerul Transporturilor nu a anunțat încă perioada de depunere. Pregătirea dosarului începe acum, nu în ziua lansării — scrieți-ne dacă vreți să fiți anunțați când se deschide.",
     snapshotTitle: "Apeluri deschise acum",
     snapshotBody: (open: number, total: number, date: string) =>
       `La ${date} erau deschise ${total} apeluri de proiecte, dintre care ${open} cu IMM-uri sau UAT-uri printre beneficiarii eligibili.`,
@@ -715,6 +717,8 @@ const en: Copy = {
       "Send us a short description of the project. We will tell you whether this instrument fits, and which alternative is stronger if it does not.",
     sidebarCta: "Request an assessment",
     alsoIn: (category: string) => `Also in ${category}`,
+    upcomingNote:
+      "The scheme is approved and the budget allocated, but the Ministry of Transport has not yet announced the submission window. Preparation starts now, not on launch day — write to us if you want to be told when it opens.",
     snapshotTitle: "Calls open right now",
     snapshotBody: (open: number, total: number, date: string) =>
       `On ${date} there were ${total} open calls, ${open} of which list SMEs or local authorities among the eligible beneficiaries.`,

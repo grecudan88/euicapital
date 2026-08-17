@@ -26,6 +26,13 @@ export type CategoryKey = (typeof categoryKeys)[number];
 export type Audience = (typeof audienceKeys)[number];
 
 /**
+ * Only set where a programme has no open call and none announced yet. Absence
+ * of a status makes no claim either way, which keeps the page honest as calls
+ * open and close without anyone editing this file.
+ */
+export type Status = "upcoming";
+
+/**
  * Verified against the Ministry of Investments and European Projects calendar.
  * Update all four fields together; the page prints `verifiedOn` next to them so
  * a stale snapshot is visible rather than misleading.
@@ -45,14 +52,33 @@ const base = [
   { slug: "pids", acronym: "PIDS", category: "social", audience: ["uat"] },
   { slug: "peo", acronym: "PEO", category: "social", audience: ["imm", "uat"] },
   { slug: "sanatate", acronym: "PS", category: "health", audience: ["uat"] },
-  { slug: "e-drive", acronym: "e-DRIVE", category: "mobility", audience: ["imm"] },
-  { slug: "e-mobility-ro", acronym: "e-Mobility RO", category: "mobility", audience: ["imm"] },
-  { slug: "e-move-ro", acronym: "e-MOVE RO", category: "mobility", audience: ["imm"] },
+  {
+    slug: "e-drive",
+    acronym: "e-DRIVE",
+    category: "mobility",
+    audience: ["imm"],
+    status: "upcoming",
+  },
+  {
+    slug: "e-mobility-ro",
+    acronym: "e-Mobility RO",
+    category: "mobility",
+    audience: ["imm"],
+    status: "upcoming",
+  },
+  {
+    slug: "e-move-ro",
+    acronym: "e-MOVE RO",
+    category: "mobility",
+    audience: ["imm"],
+    status: "upcoming",
+  },
 ] as const satisfies readonly {
   slug: string;
   acronym: string;
   category: CategoryKey;
   audience: readonly Audience[];
+  status?: Status;
 }[];
 
 export type ProgrammeSlug = (typeof base)[number]["slug"];
@@ -75,6 +101,7 @@ export type Programme = ProgrammeText & {
   acronym: string;
   category: CategoryKey;
   audience: readonly Audience[];
+  status?: Status;
 };
 
 export const categoryLabels: Record<Locale, Record<CategoryKey, string>> = {
@@ -94,6 +121,11 @@ export const categoryLabels: Record<Locale, Record<CategoryKey, string>> = {
     health: "Health",
     mobility: "Electric mobility",
   },
+};
+
+export const statusLabels: Record<Locale, Record<Status, string>> = {
+  ro: { upcoming: "Apeluri neanunțate încă" },
+  en: { upcoming: "Calls not yet announced" },
 };
 
 export const audienceLabels: Record<Locale, Record<Audience, string>> = {

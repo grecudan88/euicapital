@@ -8,6 +8,7 @@ import {
   getProgramme,
   getProgrammes,
   programmeSlugs,
+  statusLabels,
 } from "@/content/programmes";
 import { locales, type Locale, assertLocale } from "@/content/locales";
 import { getCopy } from "@/content/pages";
@@ -93,6 +94,12 @@ export default async function ProgrammePage({ params }: { params: Promise<Params
             {programme.name}
           </h1>
           <p className="mt-6 max-w-2xl text-lg leading-relaxed text-ink-200">{programme.summary}</p>
+          {programme.status ? (
+            <p className="mt-6 inline-flex items-center gap-2 rounded-full border border-gold-400/50 bg-white/5 px-4 py-1.5 text-sm font-medium text-gold-400">
+              <span aria-hidden className="h-1.5 w-1.5 rounded-full bg-gold-400" />
+              {statusLabels[locale][programme.status]}
+            </p>
+          ) : null}
         </Container>
       </section>
 
@@ -126,6 +133,12 @@ export default async function ProgrammePage({ params }: { params: Promise<Params
                 </p>
                 <p className="mt-3 text-[15px] leading-relaxed text-ink-800">{programme.watchOut}</p>
               </div>
+
+              {programme.status === "upcoming" ? (
+                <div className="mt-10 rounded-2xl bg-paper-warm p-7">
+                  <p className="text-[15px] leading-relaxed text-ink-800">{t.upcomingNote}</p>
+                </div>
+              ) : null}
 
               <h2 className="mt-14 font-display text-2xl text-ink-950">{t.bestSuited}</h2>
               <ul className="mt-6 space-y-4">
