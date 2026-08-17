@@ -46,10 +46,8 @@ export const siteCopy: Record<Locale, SiteCopy> = {
       { path: "about", label: "Despre noi" },
     ],
     stats: [
-      { value: "180 mil. €+", label: "Finanțare nerambursabilă obținută pentru clienți" },
-      { value: "240+", label: "Aplicații pregătite din 2019" },
-      { value: "38%", label: "Rată medie de succes pe programe" },
-      { value: "11", label: "State membre în care lucrăm" },
+      { value: "80 mil. €+", label: "Finanțare nerambursabilă obținută pentru clienți" },
+      { value: "95%", label: "Rată medie de obținere" },
     ],
   },
   en: {
@@ -65,10 +63,8 @@ export const siteCopy: Record<Locale, SiteCopy> = {
       { path: "about", label: "About" },
     ],
     stats: [
-      { value: "€180M+", label: "Grant funding secured for clients" },
-      { value: "240+", label: "Applications prepared since 2019" },
-      { value: "38%", label: "Average success rate across programmes" },
-      { value: "11", label: "Member States we operate in" },
+      { value: "€80M+", label: "Grant funding secured for clients" },
+      { value: "95%", label: "Average award rate" },
     ],
   },
 };

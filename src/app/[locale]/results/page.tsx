@@ -44,7 +44,7 @@ export default async function ResultsPage({ params }: { params: Promise<Params> 
 
       <section className="border-b border-ink-900/10 bg-white">
         <Container>
-          <dl className="grid grid-cols-2 gap-8 py-12 lg:grid-cols-4">
+          <dl className="grid max-w-2xl grid-cols-1 gap-8 py-12 sm:grid-cols-2">
             {stats.map((stat) => (
               <div key={stat.label}>
                 <dt className="font-display text-3xl text-ink-950 sm:text-4xl">{stat.value}</dt>

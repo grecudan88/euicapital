@@ -95,7 +95,7 @@ function Hero({ locale }: { locale: Locale }) {
 
       <div className="relative border-t border-white/10">
         <Container>
-          <dl className="grid grid-cols-2 gap-px lg:grid-cols-4">
+          <dl className="grid max-w-2xl grid-cols-1 gap-px sm:grid-cols-2">
             {stats.map((stat) => (
               <div key={stat.label} className="px-2 py-8 lg:px-6">
                 <dt className="font-display text-3xl text-gold-400 sm:text-4xl">{stat.value}</dt>
