@@ -158,11 +158,17 @@ Until that rule exists the site still works on both hosts and search engines con
 
 **Email via Resend** (simplest)
 
+1. Create a free account at [resend.com](https://resend.com) — 3,000 emails/month, no card.
+2. Add `euicapital.ro` under *Domains* and paste the DKIM/SPF records it gives you into Cloudflare DNS. Verification takes a few minutes.
+3. Create an API key and store it:
+
 ```bash
 npx wrangler secret put RESEND_API_KEY
 ```
 
-Then set the verified sender address in `worker/index.ts` (`from:`) and the recipient in `wrangler.jsonc` (`vars.CONTACT_TO`).
+Recipient and sender are plain vars in `wrangler.jsonc` — `CONTACT_TO` and `CONTACT_FROM` — so neither needs a code change.
+
+**To test before the domain is verified**, sign up for Resend with the address in `CONTACT_TO` and set `CONTACT_FROM` to `onboarding@resend.dev`. That sender delivers only to the Resend account owner, which is enough to prove the pipeline works end to end.
 
 **Webhook** — Slack, Zapier, n8n, a CRM, anything that accepts a JSON `POST`:
 
@@ -170,13 +176,15 @@ Then set the verified sender address in `worker/index.ts` (`from:`) and the reci
 npx wrangler secret put CONTACT_WEBHOOK_URL
 ```
 
-**KV storage** — keep every lead at the edge for a year:
+**KV storage** — an archive, not a delivery channel:
 
 ```bash
 npx wrangler kv namespace create LEADS
 ```
 
-Paste the returned id into the commented `kv_namespaces` block in `wrangler.jsonc`.
+Paste the returned id into the commented `kv_namespaces` block in `wrangler.jsonc`. Every enquiry is then kept at the edge for a year.
+
+Note that KV deliberately does **not** count as delivery. With only KV configured the endpoint still answers 503 and the form tells the visitor to email directly — which loses fewer clients than answering "message received" while the enquiry sits in storage nobody reads. Add it alongside email, not instead of it.
 
 The endpoint already handles a honeypot field, per-field length caps, email format validation, and method checks. If the form starts attracting volume, add [Cloudflare Turnstile](https://developers.cloudflare.com/turnstile/) — it is free and integrates in a few lines.
 

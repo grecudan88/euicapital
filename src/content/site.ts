@@ -13,7 +13,7 @@ export const site = {
   cui: "43390519",
   regCom: "J2020002956224",
   caen: "7020",
-  email: "contact@euicapital.ro",
+  email: "icapitalgrup@gmail.com",
   /** Display form of 0726157163. */
   phone: "+40 726 157 163",
   phoneHref: "+40726157163",

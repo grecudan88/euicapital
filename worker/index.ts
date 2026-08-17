@@ -33,6 +33,12 @@ interface Env {
   CONTACT_TO: string;
   /** Apex host every request is folded onto, e.g. "euicapital.ro". */
   CANONICAL_HOST: string;
+  /**
+   * Sender for enquiry emails. Must be an address on a domain verified in
+   * Resend. Use "onboarding@resend.dev" to test before verifying a domain —
+   * that sender only delivers to the Resend account owner.
+   */
+  CONTACT_FROM: string;
   /** Optional secret: npx wrangler secret put RESEND_API_KEY */
   RESEND_API_KEY?: string;
   /** Optional secret: any URL that accepts a JSON POST (Slack, Zapier, n8n...) */
@@ -261,7 +267,7 @@ async function deliver(lead: Lead, env: Env, meta: Record<string, string>): Prom
         "content-type": "application/json",
       },
       body: JSON.stringify({
-        from: "EUI Capital website <website@euicapital.ro>",
+        from: env.CONTACT_FROM,
         to: [env.CONTACT_TO],
         reply_to: lead.email,
         subject: `Enquiry — ${lead.organisation || lead.name}`,
@@ -280,12 +286,15 @@ async function deliver(lead: Lead, env: Env, meta: Record<string, string>): Prom
     delivered ||= res.ok;
   }
 
+  // KV is an archive, not a delivery channel. It deliberately does NOT set
+  // `delivered`: if it did, an unconfigured site would answer "message
+  // received" while the enquiry sat in storage that nobody reads. Reporting
+  // failure and telling the visitor to email directly loses fewer clients.
   if (env.LEADS) {
     const key = `lead:${new Date().toISOString()}:${crypto.randomUUID()}`;
     await env.LEADS.put(key, JSON.stringify({ lead, meta }), {
       expirationTtl: 60 * 60 * 24 * 365,
     });
-    delivered = true;
   }
 
   return delivered;

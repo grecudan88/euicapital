@@ -26,7 +26,11 @@
   "observability": { "enabled": true },
   "vars": {
     "CANONICAL_HOST": "euicapital.ro",
-    "CONTACT_TO": "contact@euicapital.ro"
+    // Where enquiries are delivered.
+    "CONTACT_TO": "icapitalgrup@gmail.com",
+    // Sender. Requires euicapital.ro to be verified in Resend; swap for
+    // "onboarding@resend.dev" to test before the domain is verified.
+    "CONTACT_FROM": "EUI Capital <contact@euicapital.ro>"
   }
   // Optional lead storage — create with:  npx wrangler kv namespace create LEADS
   // "kv_namespaces": [{ "binding": "LEADS", "id": "<paste-id-here>" }]

@@ -465,7 +465,7 @@ const ro = {
       {
         heading: "Cine suntem",
         body: [
-          "European iCapital Advisory SRL (denumire comercială EUI Capital), CUI 43390519, Nr. Reg. Com. J2020002956224, cu sediul social în Fdc. Emil Racoviță nr. 19, Mun. Iași, jud. Iași, este operatorul datelor cu caracter personal colectate prin acest site. Ne puteți contacta la contact@euicapital.ro sau la +40 726 157 163.",
+          "European iCapital Advisory SRL (denumire comercială EUI Capital), CUI 43390519, Nr. Reg. Com. J2020002956224, cu sediul social în Fdc. Emil Racoviță nr. 19, Mun. Iași, jud. Iași, este operatorul datelor cu caracter personal colectate prin acest site. Ne puteți contacta la icapitalgrup@gmail.com sau la +40 726 157 163.",
         ],
       },
       {
@@ -1007,7 +1007,7 @@ const en: Copy = {
       {
         heading: "Who we are",
         body: [
-          "European iCapital Advisory SRL (trading as EUI Capital), tax ID 43390519, Trade Register No. J2020002956224, registered at Fdc. Emil Racoviță 19, Iași, Iași County, Romania, is the data controller for personal data collected through this website. You can reach us at contact@euicapital.ro or on +40 726 157 163.",
+          "European iCapital Advisory SRL (trading as EUI Capital), tax ID 43390519, Trade Register No. J2020002956224, registered at Fdc. Emil Racoviță 19, Iași, Iași County, Romania, is the data controller for personal data collected through this website. You can reach us at icapitalgrup@gmail.com or on +40 726 157 163.",
         ],
       },
       {
