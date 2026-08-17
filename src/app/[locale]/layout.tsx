@@ -47,18 +47,18 @@ export async function generateMetadata({
       locale === "ro"
         ? [
             "consultanta fonduri europene",
-            "consultant Orizont Europa",
+            "fonduri nerambursabile IMM",
             "scriere proiecte europene",
             "fonduri nerambursabile",
-            "FEDR",
-            "finantare UE",
+            "fonduri europene primarii UAT",
+            "programe regionale 2021-2027",
           ]
         : [
             "EU funding consultancy",
-            "Horizon Europe consultant",
+            "SME grant funding Romania",
             "grant writing",
             "European funds",
-            "ERDF",
+            "local authority EU funding",
             "EU grant application",
           ],
     alternates: {

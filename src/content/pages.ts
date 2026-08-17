@@ -129,16 +129,14 @@ const ro = {
   programmes: {
     metaTitle: "Programe de finanțare europeană",
     metaDescription:
-      "Orizont Europa, Europa Digitală, FEDR, FSE+, LIFE, MIE, Fondul pentru Inovare, Interreg și dezvoltare rurală — ce finanțează fiecare instrument și cine este eligibil.",
+      "Programele de finanțare deschise pentru IMM-uri și UAT-uri în România: Programele Regionale, PoCIDIF, Dezvoltare Durabilă, Tranziție Justă, PIDS, Educație și Ocupare, Sănătate.",
     eyebrow: "Programe",
-    title: "Instrumentele și cui i se potrivește fiecare",
-    lede: "Două lucruri decid unde se încadrează proiectul vostru: ce construiți și cine administrează banii. Filtrați după temă sau după modul de gestiune.",
+    title: "Programele deschise pentru IMM-uri și UAT-uri",
+    lede: "Șapte programe finanțează astăzi firmele private și administrațiile locale din România. Filtrați după cine sunteți și după domeniul investiției.",
     searchLabel: "Căutare",
-    searchPlaceholder: "ex. hidrogen, formare, investiții IMM",
-    managementLabel: "Mod de gestiune",
-    managementAll: "Toate",
-    managementDirect: "Directă",
-    managementShared: "Partajată",
+    searchPlaceholder: "ex. eficiență energetică, digitalizare, locuințe sociale",
+    audienceLabel: "Cine aplică",
+    audienceAll: "Toate",
     themeAll: "Toate temele",
     showing: (shown: number, total: number) =>
       `Se afișează ${shown} din ${total} programe`,
@@ -146,29 +144,34 @@ const ro = {
     emptyBody: "Încercați o căutare mai largă sau",
     emptyLink: "întrebați-ne direct",
     emptyBodyEnd: "— nu toate schemele naționale și regionale sunt listate aici.",
-    budgetLabel: "Buget",
+    applicantsLabel: "Cine poate aplica",
     coFundingLabel: "Cofinanțare",
     detailLink: "Detalii program",
-    asideTitle: "Gestiune directă sau partajată — de ce contează",
+    asideTitle: "De ce contează regiunea și autoritatea de management",
     asideDirect:
-      "Gestiunea directă înseamnă că apelul este derulat chiar de Comisia Europeană sau de una dintre agențiile sale executive. Un singur set de reguli, un singur portal, un singur termen și competiție la nivelul întregii Uniuni. Punctajele sunt de regulă comunicate într-un raport de evaluare.",
+      "Toate programele de aici sunt în gestiune partajată: banii vin de la Uniunea Europeană, dar apelurile, ghidurile, punctajele și termenele sunt stabilite de autorități din România. Pentru Programele Regionale, asta înseamnă opt seturi diferite de reguli, câte unul pentru fiecare regiune de dezvoltare.",
     asideShared:
-      "Gestiunea partajată înseamnă că banii sunt alocați statului membru sau regiunii, care stabilește propriile apeluri, formulare, limbă și punctaje. Competiția este mai mică, birocrația este locală, iar regulile de ajutor de stat decid de obicei intensitatea maximă a finanțării.",
+      "Consecința practică: aceeași măsură poate avea criterii, plafoane și intensități diferite de la o regiune la alta. Regulile de ajutor de stat — de minimis sau ajutor regional — decid de obicei procentul maxim pe care îl puteți primi, adesea sub rata anunțată a programului.",
     asideNote:
-      "Cifrele de pe această pagină sunt alocări orientative pentru cadrul financiar multianual 2021–2027 și sunt rotunjite. Verificați întotdeauna programul de lucru și documentația apelului înainte de a lua o decizie.",
+      "Descrierile de pe această pagină acoperă scopul și eligibilitatea fiecărui program, care se schimbă rar. Apelurile individuale se deschid și se închid la câteva săptămâni — verificați întotdeauna ghidul solicitantului în vigoare înainte de a lua o decizie.",
     howItWorks: "Cum funcționează programul",
     whereApplicantsLose: "Unde pierd solicitanții",
     bestSuited: "Potrivit în special pentru",
-    factBudget: "Buget orientativ",
-    factManaged: "Gestionat de",
+    factAuthority: "Autoritate de management",
+    factApplicants: "Cine poate aplica",
     factCoFunding: "Rată de cofinanțare",
-    factTypical: "Valoare tipică a grantului",
+    factAudience: "Se adresează",
     sidebarTitle: (acronym: string) => `Vi se potrivește ${acronym}?`,
     sidebarBody:
       "Trimiteți-ne o descriere scurtă a proiectului. Vă spunem dacă acest instrument se potrivește și care este alternativa mai bună dacă nu.",
     sidebarCta: "Cereți o evaluare",
     alsoIn: (category: string) => `Tot în ${category}`,
-    managementTag: (mode: string) => `Gestiune ${mode.toLowerCase()}`,
+    snapshotTitle: "Apeluri deschise acum",
+    snapshotBody: (open: number, total: number, date: string) =>
+      `La ${date} erau deschise ${total} apeluri de proiecte, dintre care ${open} cu IMM-uri sau UAT-uri printre beneficiarii eligibili.`,
+    snapshotNote:
+      "Instantaneu din calendarul oficial al Ministerului Investițiilor și Proiectelor Europene. Termenele se modifică des — scrieți-ne pentru situația la zi a apelurilor relevante pentru voi.",
+    snapshotLink: "Calendarul oficial MIPE",
   },
 
   process: {
@@ -277,7 +280,7 @@ const ro = {
   results: {
     metaTitle: "Rezultate",
     metaDescription:
-      "Proiecte selectate de finanțare europeană, prin Orizont Europa, FEDR, LIFE, FSE+, Interreg și Fondul pentru Inovare.",
+      "Proiecte de finanțare europeană derulate pentru IMM-uri și autorități locale din România.",
     eyebrow: "Rezultate",
     title: "Proiecte selectate",
     lede: "Clienții sunt anonimizați la cererea lor. Programul, suma și rezultatul sunt prezentate așa cum au fost consemnate la contractare.",
@@ -673,16 +676,14 @@ const en: Copy = {
   programmes: {
     metaTitle: "EU funding programmes",
     metaDescription:
-      "Horizon Europe, Digital Europe, ERDF, ESF+, LIFE, CEF, the Innovation Fund, Interreg and rural development — what each instrument funds and who is eligible.",
+      "The funding programmes currently open to Romanian SMEs and local authorities: Regional Programmes, PoCIDIF, Sustainable Development, Just Transition, PIDS, Education and Employment, Health.",
     eyebrow: "Programmes",
-    title: "The instruments, and who each one is actually for",
-    lede: "Two things decide where your project belongs: what you are building, and who administers the money. Filter by theme or management mode to narrow it down.",
+    title: "The programmes open to SMEs and local authorities",
+    lede: "Seven programmes currently fund private companies and local government in Romania. Filter by who you are and by the field you are investing in.",
     searchLabel: "Search",
-    searchPlaceholder: "e.g. hydrogen, training, SME investment",
-    managementLabel: "Management mode",
-    managementAll: "All",
-    managementDirect: "Direct",
-    managementShared: "Shared",
+    searchPlaceholder: "e.g. energy efficiency, digitalisation, social housing",
+    audienceLabel: "Who applies",
+    audienceAll: "All",
     themeAll: "All themes",
     showing: (shown: number, total: number) =>
       `Showing ${shown} of ${total} programmes`,
@@ -690,29 +691,34 @@ const en: Copy = {
     emptyBody: "Try a broader search, or",
     emptyLink: "ask us directly",
     emptyBodyEnd: "— national and regional schemes are not all listed here.",
-    budgetLabel: "Budget",
+    applicantsLabel: "Who can apply",
     coFundingLabel: "Co-funding",
     detailLink: "Programme detail",
-    asideTitle: "Direct or shared management — why it matters",
+    asideTitle: "Why the region and the managing authority matter",
     asideDirect:
-      "Direct management means the European Commission or one of its executive agencies runs the call itself. One set of rules, one portal, one deadline, and competition across the whole Union. Scores are typically published in an Evaluation Summary Report.",
+      "Every programme here is under shared management: the money comes from the European Union, but the calls, guidance, scoring and deadlines are set by Romanian authorities. For the Regional Programmes that means eight different rulebooks, one per development region.",
     asideShared:
-      "Shared management means the money is allocated to your Member State or region, which sets its own calls, forms, language and scoring. The competition is smaller, the paperwork is local, and state aid rules usually decide your maximum funding intensity.",
+      "The practical consequence: the same measure can carry different criteria, ceilings and aid intensities from one region to the next. State aid rules, de minimis or regional aid, usually decide the maximum percentage you can receive, often below the headline rate of the programme.",
     asideNote:
-      "Figures on this page are indicative headline allocations for the 2021–2027 multiannual financial framework and are rounded. Always confirm against the current work programme and call documentation before making a decision.",
+      "The descriptions on this page cover each programme scope and eligibility, which rarely change. Individual calls open and close every few weeks, so always check the applicant guide in force before making a decision.",
     howItWorks: "How the programme works",
     whereApplicantsLose: "Where applicants lose",
     bestSuited: "Best suited to",
-    factBudget: "Indicative budget",
-    factManaged: "Managed by",
+    factAuthority: "Managing authority",
+    factApplicants: "Who can apply",
     factCoFunding: "Co-funding rate",
-    factTypical: "Typical grant size",
+    factAudience: "Aimed at",
     sidebarTitle: (acronym: string) => `Is ${acronym} the right fit for you?`,
     sidebarBody:
       "Send us a short description of the project. We will tell you whether this instrument fits, and which alternative is stronger if it does not.",
     sidebarCta: "Request an assessment",
     alsoIn: (category: string) => `Also in ${category}`,
-    managementTag: (mode: string) => `${mode} management`,
+    snapshotTitle: "Calls open right now",
+    snapshotBody: (open: number, total: number, date: string) =>
+      `On ${date} there were ${total} open calls, ${open} of which list SMEs or local authorities among the eligible beneficiaries.`,
+    snapshotNote:
+      "A snapshot of the official calendar published by the Romanian Ministry of Investments and European Projects. Deadlines move often, so write to us for the current position on the calls relevant to you.",
+    snapshotLink: "Official MIPE calendar",
   },
 
   process: {
@@ -821,7 +827,7 @@ const en: Copy = {
   results: {
     metaTitle: "Results",
     metaDescription:
-      "Selected EU funding engagements across Horizon Europe, ERDF, LIFE, ESF+, Interreg and the Innovation Fund.",
+      "Selected EU funding engagements delivered for Romanian SMEs and local authorities.",
     eyebrow: "Results",
     title: "Selected engagements",
     lede: "Clients are anonymised at their request. Programme, amount and outcome are stated as they were recorded at award.",

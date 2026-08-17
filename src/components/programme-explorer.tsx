@@ -3,42 +3,45 @@
 import Link from "next/link";
 import { useMemo, useState } from "react";
 import {
+  audienceKeys,
+  audienceLabels,
   categoryKeys,
   categoryLabels,
   getProgrammes,
+  type Audience,
   type CategoryKey,
-  type Management,
 } from "@/content/programmes";
 import type { Locale } from "@/content/locales";
 import { getCopy } from "@/content/pages";
 import { href } from "@/content/site";
 import { ArrowRight, Tag } from "./ui";
 
-type ManagementFilter = "all" | Management;
+type AudienceFilter = "all" | Audience;
 
 export function ProgrammeExplorer({ locale }: { locale: Locale }) {
   const [category, setCategory] = useState<CategoryKey | "all">("all");
-  const [management, setManagement] = useState<ManagementFilter>("all");
+  const [audience, setAudience] = useState<AudienceFilter>("all");
   const [query, setQuery] = useState("");
 
   const t = getCopy(locale).programmes;
   const labels = categoryLabels[locale];
+  const who = audienceLabels[locale];
   const programmes = useMemo(() => getProgrammes(locale), [locale]);
 
   const filtered = useMemo(() => {
     const q = normalise(query);
     return programmes.filter((p) => {
       if (category !== "all" && p.category !== category) return false;
-      if (management !== "all" && p.management !== management) return false;
+      if (audience !== "all" && !p.audience.includes(audience)) return false;
       if (!q) return true;
-      return normalise(`${p.name} ${p.acronym} ${p.summary} ${p.bestFor.join(" ")}`).includes(q);
+      const haystack = `${p.name} ${p.acronym} ${p.summary} ${p.whoApplies} ${p.bestFor.join(" ")}`;
+      return normalise(haystack).includes(q);
     });
-  }, [programmes, category, management, query]);
+  }, [programmes, category, audience, query]);
 
-  const managementOptions: [ManagementFilter, string][] = [
-    ["all", t.managementAll],
-    ["direct", t.managementDirect],
-    ["shared", t.managementShared],
+  const audienceOptions: [AudienceFilter, string][] = [
+    ["all", t.audienceAll],
+    ...audienceKeys.map((k) => [k, who[k]] as [AudienceFilter, string]),
   ];
 
   return (
@@ -60,19 +63,17 @@ export function ProgrammeExplorer({ locale }: { locale: Locale }) {
 
           <fieldset>
             <legend className="text-xs font-semibold uppercase tracking-[0.14em] text-ink-600">
-              {t.managementLabel}
+              {t.audienceLabel}
             </legend>
             <div className="mt-2 inline-flex rounded-lg border border-ink-900/15 p-1">
-              {managementOptions.map(([value, label]) => (
+              {audienceOptions.map(([value, label]) => (
                 <button
                   key={value}
                   type="button"
-                  aria-pressed={management === value}
-                  onClick={() => setManagement(value)}
+                  aria-pressed={audience === value}
+                  onClick={() => setAudience(value)}
                   className={`rounded-md px-4 py-1.5 text-sm font-medium transition ${
-                    management === value
-                      ? "bg-ink-900 text-paper"
-                      : "text-ink-600 hover:text-ink-900"
+                    audience === value ? "bg-ink-900 text-paper" : "text-ink-600 hover:text-ink-900"
                   }`}
                 >
                   {label}
@@ -128,17 +129,21 @@ export function ProgrammeExplorer({ locale }: { locale: Locale }) {
                 <span className="font-mono text-xs font-semibold tracking-wider text-gold-600">
                   {p.acronym}
                 </span>
-                <Tag>{labels[p.category]}</Tag>
+                <div className="flex flex-wrap justify-end gap-1.5">
+                  {p.audience.map((a) => (
+                    <Tag key={a}>{who[a]}</Tag>
+                  ))}
+                </div>
               </div>
               <h3 className="mt-4 font-display text-xl leading-snug text-ink-950">{p.name}</h3>
               <p className="mt-3 flex-1 text-[15px] leading-relaxed text-ink-700">{p.summary}</p>
 
-              <dl className="mt-6 grid grid-cols-2 gap-4 border-t border-ink-900/10 pt-5 text-sm">
+              <dl className="mt-6 grid gap-4 border-t border-ink-900/10 pt-5 text-sm sm:grid-cols-2">
                 <div>
                   <dt className="text-xs uppercase tracking-[0.1em] text-ink-400">
-                    {t.budgetLabel}
+                    {t.applicantsLabel}
                   </dt>
-                  <dd className="mt-1 font-medium text-ink-900">{p.budget}</dd>
+                  <dd className="mt-1 font-medium text-ink-900">{p.whoApplies}</dd>
                 </div>
                 <div>
                   <dt className="text-xs uppercase tracking-[0.1em] text-ink-400">

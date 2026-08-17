@@ -12,7 +12,7 @@ import {
 import { assertLocale, type Locale } from "@/content/locales";
 import { getCopy } from "@/content/pages";
 import { getServices } from "@/content/services";
-import { categoryLabels, getProgrammes } from "@/content/programmes";
+import { audienceLabels, getProgrammes } from "@/content/programmes";
 import { getCaseStudies } from "@/content/results";
 import { href, siteCopy } from "@/content/site";
 
@@ -175,7 +175,7 @@ function Services({ locale }: { locale: Locale }) {
 function Programmes({ locale }: { locale: Locale }) {
   const t = getCopy(locale).home;
   const programmes = getProgrammes(locale);
-  const labels = categoryLabels[locale];
+  const who = audienceLabels[locale];
 
   return (
     <section className="bg-paper py-24 sm:py-32">
@@ -197,13 +197,17 @@ function Programmes({ locale }: { locale: Locale }) {
                   <span className="font-mono text-xs font-semibold tracking-wider text-gold-600">
                     {p.acronym}
                   </span>
-                  <Tag>{labels[p.category]}</Tag>
+                  <div className="flex flex-wrap justify-end gap-1.5">
+                    {p.audience.map((a) => (
+                      <Tag key={a}>{who[a]}</Tag>
+                    ))}
+                  </div>
                 </div>
                 <h3 className="mt-4 font-display text-lg leading-snug text-ink-950">{p.name}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-ink-600">{p.summary}</p>
               </div>
-              <p className="mt-5 flex items-center justify-between border-t border-ink-900/10 pt-4 text-sm">
-                <span className="font-medium text-ink-900">{p.budget}</span>
+              <p className="mt-5 flex items-center justify-between gap-3 border-t border-ink-900/10 pt-4 text-sm">
+                <span className="font-medium text-ink-900">{p.whoApplies}</span>
                 <ArrowRight className="text-ink-400 transition group-hover:translate-x-1 group-hover:text-gold-600" />
               </p>
             </Link>

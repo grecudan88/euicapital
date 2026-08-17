@@ -3,10 +3,10 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowRight, ButtonLink, Container, Eyebrow, Tag } from "@/components/ui";
 import {
+  audienceLabels,
   categoryLabels,
   getProgramme,
   getProgrammes,
-  managementLabels,
   programmeSlugs,
 } from "@/content/programmes";
 import { locales, type Locale, assertLocale } from "@/content/locales";
@@ -58,11 +58,12 @@ export default async function ProgrammePage({ params }: { params: Promise<Params
     (p) => p.slug !== programme.slug && p.category === programme.category,
   );
 
+  const who = audienceLabels[locale];
   const facts = [
-    { label: t.factBudget, value: programme.budget },
-    { label: t.factManaged, value: managementLabels[locale][programme.management] },
+    { label: t.factAuthority, value: programme.authority },
+    { label: t.factApplicants, value: programme.whoApplies },
     { label: t.factCoFunding, value: programme.coFunding },
-    { label: t.factTypical, value: programme.typicalGrant },
+    { label: t.factAudience, value: programme.audience.map((a) => who[a]).join(" · ") },
   ];
 
   return (
@@ -174,11 +175,9 @@ export default async function ProgrammePage({ params }: { params: Promise<Params
 
               <div className="mt-6 flex flex-wrap gap-2">
                 <Tag>{categoryLabel}</Tag>
-                <Tag>
-                  {t.managementTag(
-                    programme.management === "direct" ? t.managementDirect : t.managementShared,
-                  )}
-                </Tag>
+                {programme.audience.map((a) => (
+                  <Tag key={a}>{who[a]}</Tag>
+                ))}
               </div>
             </aside>
           </div>
