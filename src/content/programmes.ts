@@ -17,6 +17,7 @@ export const categoryKeys = [
   "green",
   "social",
   "health",
+  "mobility",
 ] as const;
 
 export const audienceKeys = ["imm", "uat"] as const;
@@ -44,6 +45,9 @@ const base = [
   { slug: "pids", acronym: "PIDS", category: "social", audience: ["uat"] },
   { slug: "peo", acronym: "PEO", category: "social", audience: ["imm", "uat"] },
   { slug: "sanatate", acronym: "PS", category: "health", audience: ["uat"] },
+  { slug: "e-drive", acronym: "e-DRIVE", category: "mobility", audience: ["imm"] },
+  { slug: "e-mobility-ro", acronym: "e-Mobility RO", category: "mobility", audience: ["imm"] },
+  { slug: "e-move-ro", acronym: "e-MOVE RO", category: "mobility", audience: ["imm"] },
 ] as const satisfies readonly {
   slug: string;
   acronym: string;
@@ -56,6 +60,8 @@ export type ProgrammeSlug = (typeof base)[number]["slug"];
 type ProgrammeText = {
   name: string;
   authority: string;
+  /** Published allocation, where an official figure exists. Rendered only if set. */
+  budget?: string;
   whoApplies: string;
   coFunding: string;
   summary: string;
@@ -78,6 +84,7 @@ export const categoryLabels: Record<Locale, Record<CategoryKey, string>> = {
     green: "Energie și mediu",
     social: "Social și ocupare",
     health: "Sănătate",
+    mobility: "Mobilitate electrică",
   },
   en: {
     regional: "Regional",
@@ -85,6 +92,7 @@ export const categoryLabels: Record<Locale, Record<CategoryKey, string>> = {
     green: "Energy and environment",
     social: "Social and employment",
     health: "Health",
+    mobility: "Electric mobility",
   },
 };
 
@@ -214,6 +222,60 @@ const text: Record<Locale, Record<ProgrammeSlug, ProgrammeText>> = {
       watchOut:
         "Multe apeluri cer dovada nevoii la nivel de comunitate și corelarea cu planurile regionale de servicii de sănătate.",
     },
+    "e-drive": {
+      name: "e-DRIVE",
+      authority: "Ministerul Transporturilor și Infrastructurii",
+      budget: "56,9 mil. €",
+      whoApplies: "Întreprinderi, inclusiv operatori de transport public de persoane",
+      coFunding: "Ajutor de stat și de minimis, două măsuri distincte",
+      summary:
+        "Înlocuirea vehiculelor poluante din flotele companiilor și din transportul public de persoane cu vehicule cu zero emisii.",
+      detail:
+        "Schemă finanțată din Fondul pentru Modernizare, administrată de Ministerul Transporturilor și Infrastructurii. Acoperă înlocuirea vehiculelor poluante din parcul auto propriu al companiilor și din transportul public de călători cu vehicule cu zero emisii, prin două măsuri de finanțare distincte — una de ajutor de stat, cealaltă de minimis. Schema a fost revizuită prin OMTI nr. 742/2026, publicat în Monitorul Oficial nr. 655 din 7 august 2026.",
+      bestFor: [
+        "Firme cu flotă proprie care trec la vehicule electrice",
+        "Operatori de transport public de persoane, inclusiv societăți deținute de autorități locale",
+        "Companii de logistică și distribuție",
+      ],
+      watchOut:
+        "Cele două măsuri au reguli diferite. Alegerea între ajutor de stat și de minimis vă schimbă atât plafonul, cât și ce alte finanțări mai puteți primi în următorii trei ani.",
+    },
+    "e-mobility-ro": {
+      name: "e-Mobility RO",
+      authority: "Ministerul Transporturilor și Infrastructurii",
+      budget: "299 mil. €",
+      whoApplies: "Microîntreprinderi, IMM-uri și întreprinderi mari înregistrate în România",
+      coFunding: "Schemă de ajutor de stat, intensitate stabilită prin ghid",
+      summary:
+        "Stații de reîncărcare pentru vehicule electrice pe rețeaua națională de autostrăzi, drumuri expres și drumuri naționale.",
+      detail:
+        "Schemă finanțată din Fondul pentru Modernizare, care vizează o rețea națională de reîncărcare amplasată strategic pe autostrăzi, drumuri expres și drumuri naționale. Sunt eligibile și proiectele integrate, care adaugă producție de energie din surse regenerabile la fața locului și sisteme de stocare. Schema a fost revizuită prin OMTI nr. 746/2026, publicat în Monitorul Oficial nr. 656 din 7 august 2026.",
+      bestFor: [
+        "Operatori de stații de reîncărcare și investitori în infrastructură",
+        "Companii petroliere și lanțuri de benzinării",
+        "Firme cu terenuri amplasate pe coridoarele rutiere principale",
+      ],
+      watchOut:
+        "Amplasamentul decide totul: rețeaua vizată este cea de autostrăzi, drumuri expres și naționale. O locație bună comercial, dar în afara acestei rețele, nu este eligibilă aici.",
+    },
+    "e-move-ro": {
+      name: "e-MOVE RO",
+      authority: "Ministerul Transporturilor și Infrastructurii",
+      budget: "262 mil. €",
+      whoApplies: "Microîntreprinderi, IMM-uri și întreprinderi mari înregistrate în România",
+      coFunding: "Schemă de ajutor de stat, pe submăsuri",
+      summary:
+        "Infrastructură publică de reîncărcare pentru mobilitate cu zero emisii, în sprijinul întreprinderilor și comunităților.",
+      detail:
+        "Schemă finanțată din Fondul pentru Modernizare, pentru construirea, instalarea, modernizarea sau extinderea infrastructurii publice de reîncărcare. Include producția de energie regenerabilă la fața locului, sisteme de stocare și lucrările de racordare între stații și unitățile de producție. Este structurată pe submăsuri: prima pentru stații accesibile atât flotei proprii, cât și publicului, a doua pentru proiecte care integrează producție și stocare. Schema a fost revizuită prin OMTI nr. 755/2026, publicat în Monitorul Oficial nr. 660 din 10 august 2026, care adaugă o a treia submăsură.",
+      bestFor: [
+        "Firme care instalează stații accesibile publicului la sediu sau la punctele de lucru",
+        "Retail, HoReCa și centre logistice cu parcări proprii",
+        "Investitori în proiecte care combină reîncărcarea cu fotovoltaice și stocare",
+      ],
+      watchOut:
+        "Submăsura aleasă schimbă atât bugetul disponibil, cât și cerințele tehnice. Structurarea proiectului pe submăsura potrivită se face înainte de a comanda proiectarea.",
+    },
   },
   en: {
     "programe-regionale": {
@@ -334,6 +396,60 @@ const text: Record<Locale, Record<ProgrammeSlug, ProgrammeText>> = {
       ],
       watchOut:
         "Many calls require evidence of community-level need and alignment with regional health service plans.",
+    },
+    "e-drive": {
+      name: "e-DRIVE",
+      authority: "Ministry of Transport and Infrastructure",
+      budget: "EUR 56.9M",
+      whoApplies: "Enterprises, including public passenger transport operators",
+      coFunding: "State aid and de minimis, two distinct measures",
+      summary:
+        "Replacing polluting vehicles in company fleets and public passenger transport with zero-emission vehicles.",
+      detail:
+        "A Modernisation Fund scheme run by the Ministry of Transport and Infrastructure. It covers replacing polluting vehicles in company fleets and in public passenger transport with zero-emission vehicles, through two separate financing measures — one state aid, one de minimis. The scheme was revised by Ministerial Order 742/2026, published in the Official Gazette no. 655 of 7 August 2026.",
+      bestFor: [
+        "Companies with their own fleet moving to electric vehicles",
+        "Public passenger transport operators, including companies owned by local authorities",
+        "Logistics and distribution companies",
+      ],
+      watchOut:
+        "The two measures follow different rules. Choosing between state aid and de minimis changes both your ceiling and what other funding you can receive over the following three years.",
+    },
+    "e-mobility-ro": {
+      name: "e-Mobility RO",
+      authority: "Ministry of Transport and Infrastructure",
+      budget: "EUR 299M",
+      whoApplies: "Micro-enterprises, SMEs and large enterprises registered in Romania",
+      coFunding: "State aid scheme, intensity set in the applicant guide",
+      summary:
+        "Electric vehicle charging stations across the national network of motorways, express roads and national roads.",
+      detail:
+        "A Modernisation Fund scheme targeting a national charging network placed strategically on motorways, express roads and national roads. Integrated projects are also eligible, adding on-site renewable generation and storage systems. The scheme was revised by Ministerial Order 746/2026, published in the Official Gazette no. 656 of 7 August 2026.",
+      bestFor: [
+        "Charging point operators and infrastructure investors",
+        "Fuel companies and filling station networks",
+        "Companies holding land on the main road corridors",
+      ],
+      watchOut:
+        "Location decides everything: the target is the motorway, express road and national road network. A commercially attractive site outside that network is not eligible here.",
+    },
+    "e-move-ro": {
+      name: "e-MOVE RO",
+      authority: "Ministry of Transport and Infrastructure",
+      budget: "EUR 262M",
+      whoApplies: "Micro-enterprises, SMEs and large enterprises registered in Romania",
+      coFunding: "State aid scheme, by sub-measure",
+      summary:
+        "Public charging infrastructure for zero-emission mobility, in support of businesses and communities.",
+      detail:
+        "A Modernisation Fund scheme for building, installing, modernising or extending publicly accessible charging infrastructure. It includes on-site renewable generation, storage systems and the connection works between the charging points and the generation units. It is structured in sub-measures: the first for stations accessible to both a company fleet and the public, the second for projects integrating generation and storage. The scheme was revised by Ministerial Order 755/2026, published in the Official Gazette no. 660 of 10 August 2026, which adds a third sub-measure.",
+      bestFor: [
+        "Companies installing publicly accessible charging at their own sites",
+        "Retail, hospitality and logistics centres with their own car parks",
+        "Investors combining charging with solar generation and storage",
+      ],
+      watchOut:
+        "The sub-measure you choose changes both the budget available and the technical requirements. Structure the project against the right one before commissioning any design work.",
     },
   },
 };

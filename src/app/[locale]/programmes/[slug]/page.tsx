@@ -63,6 +63,8 @@ export default async function ProgrammePage({ params }: { params: Promise<Params
     { label: t.factAuthority, value: programme.authority },
     { label: t.factApplicants, value: programme.whoApplies },
     { label: t.factCoFunding, value: programme.coFunding },
+    // Only the Modernisation Fund schemes publish a headline allocation.
+    ...(programme.budget ? [{ label: t.factBudget, value: programme.budget }] : []),
     { label: t.factAudience, value: programme.audience.map((a) => who[a]).join(" · ") },
   ];
 
@@ -96,7 +98,7 @@ export default async function ProgrammePage({ params }: { params: Promise<Params
 
       <section className="border-b border-ink-900/10 bg-white">
         <Container>
-          <dl className="grid gap-8 py-10 sm:grid-cols-2 lg:grid-cols-4">
+          <dl className="grid gap-8 py-10 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5">
             {facts.map((fact) => (
               <div key={fact.label}>
                 <dt className="text-xs font-semibold uppercase tracking-[0.12em] text-ink-400">
